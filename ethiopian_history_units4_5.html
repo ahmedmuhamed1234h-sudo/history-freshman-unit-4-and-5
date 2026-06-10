@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethiopian History Master — Units 4 & 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS & THEME
+═══════════════════════════════════════════ */
+:root {
+  --bg: #f0f2f8;
+  --bg2: #e4e8f4;
+  --surface: rgba(255,255,255,0.85);
+  --surface2: rgba(255,255,255,0.6);
+  --border: rgba(100,120,180,0.18);
+  --ink: #1a1f3a;
+  --ink2: #3d4674;
+  --ink3: #6b78a8;
+  --gold: #c8860e;
+  --gold2: #f0a820;
+  --gold-pale: #fef3dc;
+  --teal: #0b7a6e;
+  --teal2: #12a394;
+  --teal-pale: #d0f0ec;
+  --azure: #1856a8;
+  --azure2: #2878d4;
+  --azure-pale: #d6e8fb;
+  --red: #b83030;
+  --green: #2a7a38;
+  --shadow: 0 4px 24px rgba(30,40,100,0.10);
+  --shadow2: 0 12px 48px rgba(30,40,100,0.16);
+  --r: 14px;
+  --r2: 22px;
+  --nav-h: 60px;
+  --sidebar-w: 280px;
+}
+[data-theme="dark"] {
+  --bg: #0d1020;
+  --bg2: #141828;
+  --surface: rgba(22,28,55,0.90);
+  --surface2: rgba(22,28,55,0.65);
+  --border: rgba(100,140,220,0.18);
+  --ink: #e8ecff;
+  --ink2: #a8b4e0;
+  --ink3: #6878b0;
+  --gold: #f0b030;
+  --gold2: #ffd060;
+  --gold-pale: #2a1e04;
+  --teal: #18d4c0;
+  --teal2: #22eed8;
+  --teal-pale: #081e1c;
+  --azure: #5090f0;
+  --azure2: #70b0ff;
+  --azure-pale: #08182e;
+  --surface: rgba(20,26,52,0.92);
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow2: 0 12px 48px rgba(0,0,0,0.55);
+}
+
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);transition:background .3s,color .3s;min-height:100vh;overflow-x:hidden}
+a{color:var(--azure);text-decoration:none}
+ul{list-style:none}
+button{cursor:pointer;font-family:inherit}
+input,textarea{font-family:inherit}
+
+/* ═══════════════════════════════════════════
+   ANIMATED BG
+═══════════════════════════════════════════ */
+.bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.18;animation:orbFloat 14s ease-in-out infinite}
+[data-theme="dark"] .bg-orb{opacity:.12}
+.bg-orb:nth-child(1){width:600px;height:600px;background:radial-gradient(circle,#5090f0,transparent);top:-150px;left:-150px;animation-delay:0s}
+.bg-orb:nth-child(2){width:500px;height:500px;background:radial-gradient(circle,#0b7a6e,transparent);bottom:-100px;right:-100px;animation-delay:5s}
+.bg-orb:nth-child(3){width:400px;height:400px;background:radial-gradient(circle,#c8860e,transparent);top:40%;left:45%;animation-delay:9s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,30px) scale(.97)}}
+
+/* ═══════════════════════════════════════════
+   LOADING SCREEN
+═══════════════════════════════════════════ */
+#loader{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;transition:opacity .6s}
+#loader.hidden{opacity:0;pointer-events:none}
+.loader-icon{font-size:3.5rem;animation:pulse 1.2s ease-in-out infinite}
+.loader-bar{width:240px;height:4px;background:var(--border);border-radius:999px;overflow:hidden}
+.loader-fill{height:100%;background:linear-gradient(90deg,var(--azure),var(--teal));border-radius:999px;animation:loadFill 2s ease forwards}
+.loader-text{font-size:.85rem;color:var(--ink3);letter-spacing:.08em}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes loadFill{0%{width:0}100%{width:100%}}
+
+/* ═══════════════════════════════════════════
+   PROGRESS BAR
+═══════════════════════════════════════════ */
+#readprog{position:fixed;top:0;left:0;height:3px;z-index:1001;background:linear-gradient(90deg,var(--azure),var(--teal),var(--gold));width:0%;transition:width .1s linear}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:900;background:var(--surface);backdrop-filter:blur(20px) saturate(1.8);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem;padding:0 1.25rem}
+.nav-logo{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--azure);white-space:nowrap;display:flex;align-items:center;gap:.4rem;flex-shrink:0}
+.nav-logo span{color:var(--gold)}
+.nav-search{flex:1;max-width:340px;position:relative}
+.nav-search input{width:100%;padding:.4rem .9rem .4rem 2.1rem;border-radius:999px;border:1.5px solid var(--border);background:var(--bg2);color:var(--ink);font-size:.8rem;transition:border .2s,box-shadow .2s}
+.nav-search input:focus{outline:none;border-color:var(--azure);box-shadow:0 0 0 3px rgba(24,86,168,.15)}
+.nav-search .si{position:absolute;left:.65rem;top:50%;transform:translateY(-50%);color:var(--ink3);font-size:.85rem;pointer-events:none}
+#search-drop{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow2);max-height:280px;overflow-y:auto;display:none;z-index:1000}
+.sdrop-item{padding:.65rem 1rem;font-size:.82rem;cursor:pointer;border-bottom:1px solid var(--border);color:var(--ink2)}
+.sdrop-item:hover{background:var(--azure-pale);color:var(--azure)}
+.sdrop-item:last-child{border:none}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:.5rem}
+.nav-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--ink2);transition:all .2s}
+.nav-btn:hover{border-color:var(--azure);color:var(--azure);background:var(--azure-pale)}
+.timer-badge{background:linear-gradient(135deg,var(--azure),var(--teal));color:white;border-radius:999px;padding:.25rem .75rem;font-size:.75rem;font-weight:700;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:.3rem}
+.ham{display:none}
+@media(max-width:768px){.ham{display:flex}.nav-logo span{display:none}}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════ */
+#sidebar{position:fixed;top:var(--nav-h);left:0;bottom:0;width:var(--sidebar-w);background:var(--surface);backdrop-filter:blur(20px);border-right:1px solid var(--border);overflow-y:auto;z-index:800;transition:transform .3s cubic-bezier(.4,0,.2,1);padding-bottom:2rem}
+#sidebar.closed{transform:translateX(-100%)}
+.sb-section{padding:1rem 1rem .25rem}
+.sb-label{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:.5rem;padding:0 .25rem}
+.sb-link{display:flex;align-items:center;gap:.55rem;padding:.55rem .75rem;border-radius:9px;font-size:.82rem;color:var(--ink2);transition:all .2s;cursor:pointer;width:100%;text-align:left;border:none;background:none}
+.sb-link:hover{background:var(--azure-pale);color:var(--azure)}
+.sb-link.active{background:linear-gradient(135deg,var(--azure-pale),var(--teal-pale));color:var(--azure);font-weight:600}
+.sb-link .dot{width:6px;height:6px;border-radius:50%;background:var(--ink3);flex-shrink:0}
+.sb-link.active .dot{background:var(--azure)}
+.sb-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:.55rem .75rem;border-radius:9px;font-size:.82rem;font-weight:600;color:var(--ink2);margin-bottom:.15rem;transition:background .2s}
+.sb-toggle:hover{background:var(--bg2)}
+.sb-sub{max-height:0;overflow:hidden;transition:max-height .4s ease;padding-left:1rem}
+.sb-sub.open{max-height:600px}
+
+/* ═══════════════════════════════════════════
+   MAIN LAYOUT
+═══════════════════════════════════════════ */
+#main{margin-left:var(--sidebar-w);margin-top:var(--nav-h);padding:2rem 2.5rem;position:relative;z-index:1;transition:margin-left .3s}
+#main.full{margin-left:0}
+@media(max-width:900px){#main{margin-left:0;padding:1.5rem 1rem}#sidebar{transform:translateX(-100%)}#sidebar.open{transform:translateX(0)}.ham{display:flex}}
+
+/* ═══════════════════════════════════════════
+   PAGES
+═══════════════════════════════════════════ */
+.page{display:none;animation:fadeIn .4s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════════════════════════════════════════
+   HERO / DASHBOARD
+═══════════════════════════════════════════ */
+.hero{background:linear-gradient(135deg,#0d1844 0%,#1856a8 50%,#0b7a6e 100%);border-radius:var(--r2);padding:3rem;margin-bottom:2rem;position:relative;overflow:hidden;color:white}
+.hero::after{content:'𓃭';position:absolute;right:2rem;bottom:-1rem;font-size:8rem;opacity:.06;pointer-events:none}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:.75rem;display:flex;align-items:center;gap:.4rem}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;line-height:1.15;margin-bottom:.75rem}
+.hero h1 em{color:#7dd4c8;font-style:normal}
+.hero p{font-size:.95rem;color:rgba(255,255,255,.78);max-width:520px;line-height:1.7;margin-bottom:1.75rem}
+.hero-btns{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn-primary{background:white;color:var(--azure);padding:.7rem 1.5rem;border-radius:999px;font-weight:700;font-size:.85rem;border:none;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.btn-ghost{background:rgba(255,255,255,.15);color:white;padding:.7rem 1.5rem;border-radius:999px;font-weight:600;font-size:.85rem;border:1.5px solid rgba(255,255,255,.3);transition:background .2s}
+.btn-ghost:hover{background:rgba(255,255,255,.25)}
+
+/* ═══════════════════════════════════════════
+   DASHBOARD GRID
+═══════════════════════════════════════════ */
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.dash-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.dash-card:hover{transform:translateY(-3px);box-shadow:var(--shadow2)}
+.dash-num{font-family:'Cinzel',serif;font-size:2rem;font-weight:700;color:var(--azure)}
+.dash-label{font-size:.78rem;color:var(--ink3);margin-top:.2rem}
+.dash-prog{height:6px;background:var(--bg2);border-radius:999px;margin-top:.75rem;overflow:hidden}
+.dash-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--azure),var(--teal));transition:width 1.2s ease}
+.streak-card{background:linear-gradient(135deg,var(--gold-pale),#fff8e8);border:1.5px solid var(--gold);border-radius:var(--r);padding:1.25rem}
+[data-theme="dark"] .streak-card{background:linear-gradient(135deg,#2a1e04,#1a1400)}
+.streak-num{font-size:2.5rem;font-weight:900;color:var(--gold)}
+.quote-card{background:linear-gradient(135deg,var(--azure-pale),var(--teal-pale));border:1.5px solid var(--azure);border-radius:var(--r);padding:1.5rem;grid-column:span 2}
+.quote-text{font-style:italic;color:var(--ink2);font-size:.9rem;line-height:1.7;margin-bottom:.5rem}
+.quote-author{font-size:.75rem;font-weight:600;color:var(--azure)}
+
+/* ═══════════════════════════════════════════
+   SECTION HEADERS
+═══════════════════════════════════════════ */
+.sec-head{margin-bottom:1.75rem}
+.sec-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:.3rem}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2rem);color:var(--ink);font-weight:700;line-height:1.25}
+.sec-div{width:48px;height:4px;background:linear-gradient(90deg,var(--azure),var(--teal));border-radius:2px;margin-top:.7rem}
+.unit-badge{display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,var(--azure),var(--teal));color:white;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .85rem;border-radius:999px;margin-bottom:.75rem}
+
+/* ═══════════════════════════════════════════
+   CONTENT CARDS
+═══════════════════════════════════════════ */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.25rem;margin-bottom:2rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s,border-color .25s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--azure),var(--teal));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow2);border-color:var(--azure)}
+.card:hover::before{transform:scaleX(1)}
+.card-icon{font-size:2rem;margin-bottom:.75rem;display:block}
+.card-tag{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.3rem}
+.card-title{font-family:'Cinzel',serif;font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:.65rem;line-height:1.3}
+.card-body{font-size:.85rem;color:var(--ink2);line-height:1.7}
+.kterm{display:inline-block;background:var(--teal-pale);color:var(--teal);font-size:.72rem;font-weight:600;padding:.18rem .5rem;border-radius:4px;margin:.6rem .2rem 0 0}
+[data-theme="dark"] .kterm{background:var(--teal-pale)}
+
+/* ═══════════════════════════════════════════
+   TOPIC DETAIL PAGE
+═══════════════════════════════════════════ */
+.topic-wrap{max-width:860px}
+.topic-hero{background:linear-gradient(135deg,var(--azure),var(--teal));border-radius:var(--r2);padding:2.5rem;color:white;margin-bottom:2rem}
+.topic-hero h2{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:900;margin-bottom:.5rem}
+.topic-hero p{opacity:.82;font-size:.9rem;line-height:1.6}
+.content-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;margin-bottom:1.25rem;box-shadow:var(--shadow)}
+.content-block h3{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--ink);margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
+.content-block h3 .icon{font-size:1.2rem}
+.content-block p{font-size:.88rem;color:var(--ink2);line-height:1.75;margin-bottom:.65rem}
+.content-block p:last-child{margin-bottom:0}
+.point-list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.point-list li{font-size:.87rem;color:var(--ink2);line-height:1.6;display:flex;gap:.6rem}
+.point-list li::before{content:'◆';color:var(--teal);flex-shrink:0;font-size:.6rem;margin-top:.35rem}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.85rem;margin-top:.75rem}
+.info-item{background:var(--bg2);border-radius:10px;padding:1rem}
+.info-item-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin-bottom:.25rem}
+.info-item-val{font-size:.88rem;color:var(--ink);font-weight:500}
+
+/* ═══════════════════════════════════════════
+   KEY TERMS TABLE
+═══════════════════════════════════════════ */
+.terms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.85rem;margin-top.5rem}
+.term-card{background:var(--bg2);border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:1rem 1.25rem}
+.term-word{font-weight:700;color:var(--teal);font-size:.88rem;margin-bottom:.3rem}
+.term-def{font-size:.82rem;color:var(--ink2);line-height:1.6}
+
+/* ═══════════════════════════════════════════
+   TIMELINE
+═══════════════════════════════════════════ */
+.tl-wrap{position:relative;padding-left:2rem;margin-top:1rem}
+.tl-wrap::before{content:'';position:absolute;left:.55rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--azure),var(--teal))}
+.tl-item{position:relative;margin-bottom:1.5rem;padding-left:1.25rem;opacity:0;transform:translateX(-10px);transition:opacity .5s,transform .5s}
+.tl-item.vis{opacity:1;transform:translateX(0)}
+.tl-item::before{content:'';position:absolute;left:-1.55rem;top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--azure);border:2px solid var(--bg)}
+.tl-year{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:600;color:var(--azure);margin-bottom:.2rem}
+.tl-title{font-weight:600;font-size:.88rem;color:var(--ink);margin-bottom:.25rem}
+.tl-desc{font-size:.82rem;color:var(--ink2);line-height:1.6}
+
+/* ═══════════════════════════════════════════
+   PEOPLES CARDS (unit 5.5)
+═══════════════════════════════════════════ */
+.people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;margin-top:1rem}
+.people-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;cursor:pointer;transition:all .25s}
+.people-card:hover{transform:translateY(-4px);box-shadow:var(--shadow2);border-color:var(--gold)}
+.people-card .flag{font-size:1.8rem;margin-bottom:.5rem}
+.people-card h4{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.35rem}
+.people-card p{font-size:.78rem;color:var(--ink3);line-height:1.5}
+.people-tag{display:inline-block;background:var(--gold-pale);color:var(--gold);font-size:.68rem;font-weight:600;padding:.15rem .45rem;border-radius:4px;margin-top:.5rem}
+[data-theme="dark"] .people-tag{background:var(--gold-pale)}
+
+/* ═══════════════════════════════════════════
+   COMPARISON TABLE
+═══════════════════════════════════════════ */
+.cmp-table{width:100%;border-collapse:collapse;font-size:.83rem;margin-top.75rem}
+.cmp-table th{background:linear-gradient(135deg,var(--azure),var(--teal));color:white;padding:.75rem 1rem;text-align:left;font-weight:600}
+.cmp-table td{padding:.7rem 1rem;border-bottom:1px solid var(--border);color:var(--ink2)}
+.cmp-table tr:nth-child(even){background:var(--bg2)}
+.cmp-table tr:hover td{background:var(--azure-pale);color:var(--azure)}
+
+/* ═══════════════════════════════════════════
+   FLASHCARDS
+═══════════════════════════════════════════ */
+.fc-nav{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.fc-counter{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--ink3);padding:.3rem .7rem;background:var(--bg2);border-radius:999px}
+.fc-area{perspective:1200px;height:220px;margin-bottom:1.25rem}
+.fc-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.4,0,.2,1);cursor:pointer}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-f,.fc-b{position:absolute;inset:0;border-radius:var(--r2);padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;backface-visibility:hidden;border:1px solid var(--border)}
+.fc-f{background:linear-gradient(135deg,var(--azure-pale),var(--teal-pale))}
+.fc-b{background:linear-gradient(135deg,var(--azure),var(--teal));transform:rotateY(180deg);color:white}
+.fc-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;opacity:.65;margin-bottom:.5rem}
+.fc-text{font-size:.95rem;font-weight:600;line-height:1.5;color:var(--ink)}
+.fc-b .fc-text{color:white;font-weight:400;font-size:.9rem}
+.fc-hint{font-size:.72rem;color:var(--ink3);margin-top:.65rem}
+.fc-controls{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+.fc-btn{padding:.55rem 1.25rem;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--ink2);font-size:.82rem;font-weight:600;transition:all .2s}
+.fc-btn:hover{border-color:var(--azure);color:var(--azure);background:var(--azure-pale)}
+.fc-btn.active{background:var(--azure);color:white;border-color:var(--azure)}
+.fc-prog{height:5px;background:var(--bg2);border-radius:999px;margin:1rem 0;overflow:hidden}
+.fc-prog-fill{height:100%;background:linear-gradient(90deg,var(--azure),var(--teal));border-radius:999px;transition:width .4s ease}
+
+/* ═══════════════════════════════════════════
+   QUIZ
+═══════════════════════════════════════════ */
+.quiz-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.qtab{padding:.45rem 1.1rem;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--ink3);font-size:.8rem;font-weight:600;transition:all .2s}
+.qtab.on{background:linear-gradient(135deg,var(--azure),var(--teal));color:white;border-color:transparent}
+.qtab:hover:not(.on){border-color:var(--azure);color:var(--azure)}
+.qpanel{display:none}
+.qpanel.on{display:block}
+.q-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;margin-bottom:1rem;box-shadow:var(--shadow)}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--teal);margin-bottom:.4rem}
+.q-text{font-weight:600;color:var(--ink);font-size:.9rem;line-height:1.55;margin-bottom:.9rem}
+.opts{display:flex;flex-direction:column;gap:.45rem}
+.opt{padding:.6rem .95rem;border-radius:9px;border:1.5px solid var(--border);background:var(--bg);color:var(--ink2);font-size:.84rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.55rem;text-align:left}
+.opt:hover{border-color:var(--azure);background:var(--azure-pale);color:var(--azure)}
+.opt.sel{border-color:var(--azure);background:var(--azure-pale);color:var(--azure);font-weight:600}
+.opt.ok{background:#d4edda;border-color:var(--green);color:var(--green)}
+.opt.ng{background:#fce8e8;border-color:var(--red);color:var(--red)}
+.opt-ltr{width:22px;height:22px;border-radius:50%;background:currentColor;color:white;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;opacity:.75}
+.tf-row{display:flex;gap:.75rem}
+.tf-opt{flex:1;padding:.65rem;border-radius:9px;border:2px solid var(--border);background:var(--bg);color:var(--ink2);font-weight:600;font-size:.88rem;transition:all .2s;text-align:center}
+.tf-opt:hover{border-color:var(--teal);background:var(--teal-pale);color:var(--teal)}
+.tf-opt.sel{border-color:var(--azure);background:var(--azure-pale);color:var(--azure)}
+.tf-opt.ok{background:#d4edda;border-color:var(--green);color:var(--green)}
+.tf-opt.ng{background:#fce8e8;border-color:var(--red);color:var(--red)}
+.match-area{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top.5rem}
+.match-col-h{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--azure);margin-bottom:.5rem}
+.match-opt{padding:.55rem .9rem;border-radius:8px;border:1.5px solid var(--border);background:var(--bg);color:var(--ink2);font-size:.82rem;cursor:pointer;margin-bottom:.4rem;transition:all .2s}
+.match-opt:hover{border-color:var(--azure);background:var(--azure-pale);color:var(--azure)}
+.match-opt.sel{border-color:var(--azure);background:var(--azure-pale);font-weight:600}
+.match-opt.ok{background:#d4edda;border-color:var(--green);color:var(--green)}
+.match-opt.ng{background:#fce8e8;border-color:var(--red);color:var(--red)}
+.quiz-submit{display:block;width:100%;margin-top:1.25rem;padding:.9rem;border-radius:999px;border:none;background:linear-gradient(135deg,var(--azure),var(--teal));color:white;font-size:.95rem;font-weight:700;box-shadow:0 4px 16px rgba(24,86,168,.25);transition:transform .2s,box-shadow .2s}
+.quiz-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(24,86,168,.35)}
+.score-box{background:linear-gradient(135deg,var(--azure),var(--teal));border-radius:var(--r2);padding:2rem;text-align:center;color:white;margin-top:1.25rem;display:none}
+.score-box.show{display:block}
+.score-big{font-family:'Cinzel',serif;font-size:3.5rem;font-weight:900}
+.score-sub{opacity:.8;margin-top.25rem}
+.score-progbar{background:rgba(255,255,255,.25);border-radius:999px;height:8px;margin:1rem 0;overflow:hidden}
+.score-fill{height:100%;background:white;border-radius:999px;transition:width 1s ease}
+.score-msg{font-size:.88rem;opacity:.85;margin-top.5rem}
+.retry-btn{display:inline-block;margin-top:1rem;padding:.6rem 1.5rem;border-radius:999px;border:2px solid white;color:white;background:transparent;font-weight:600;cursor:pointer;transition:background .2s}
+.retry-btn:hover{background:rgba(255,255,255,.2)}
+.explanation{font-size:.8rem;color:var(--ink3);margin-top:.4rem;padding:.4rem .75rem;background:var(--bg2);border-radius:6px;display:none}
+.explanation.show{display:block}
+
+/* ═══════════════════════════════════════════
+   NOTES
+═══════════════════════════════════════════ */
+.notes-area{width:100%;min-height:180px;border-radius:var(--r);border:1.5px solid var(--border);padding:1rem;font-size:.88rem;color:var(--ink);background:var(--surface);resize:vertical;transition:border .2s}
+.notes-area:focus{outline:none;border-color:var(--azure)}
+
+/* ═══════════════════════════════════════════
+   TIMER / POMODORO
+═══════════════════════════════════════════ */
+.timer-wrap{display:flex;flex-direction:column;align-items:center;gap:1.25rem;padding:2rem}
+.timer-clock{font-family:'Cinzel',serif;font-size:4rem;font-weight:700;color:var(--azure);letter-spacing:.05em}
+.timer-label{font-size:.8rem;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase}
+.timer-ring{width:200px;height:200px;position:relative}
+.timer-ring svg{transform:rotate(-90deg)}
+.timer-ring circle{fill:none;stroke-width:8;transition:stroke-dashoffset .5s linear}
+.timer-ring .bg{stroke:var(--border)}
+.timer-ring .fg{stroke:url(#tgrad);stroke-linecap:round}
+.timer-btns{display:flex;gap:.75rem}
+.timer-btns button{padding:.6rem 1.5rem;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--ink2);font-weight:600;transition:all .2s}
+.timer-btns button:hover{border-color:var(--azure);color:var(--azure)}
+.timer-btns .t-go{background:linear-gradient(135deg,var(--azure),var(--teal));color:white;border:none}
+.pomo-mode{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.pomo-btn{padding:.35rem .9rem;border-radius:999px;border:1.5px solid var(--border);background:var(--bg2);color:var(--ink3);font-size:.78rem;font-weight:600;transition:all .2s}
+.pomo-btn.on{background:var(--azure);color:white;border-color:var(--azure)}
+
+/* ═══════════════════════════════════════════
+   EXAM PAGE
+═══════════════════════════════════════════ */
+.exam-banner{background:linear-gradient(135deg,#7b2020,#b03030);border-radius:var(--r2);padding:2rem;color:white;margin-bottom:2rem;text-align:center}
+.exam-banner h2{font-family:'Cinzel',serif;font-size:1.8rem;margin-bottom:.5rem}
+.exam-banner p{opacity:.85;font-size:.88rem}
+.exam-info-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+.exam-badge{background:rgba(255,255,255,.15);border-radius:999px;padding:.3rem .85rem;font-size:.78rem;font-weight:600}
+
+/* ═══════════════════════════════════════════
+   BACK TO TOP
+═══════════════════════════════════════════ */
+#btt{position:fixed;bottom:1.5rem;right:1.5rem;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--azure),var(--teal));color:white;border:none;font-size:1.1rem;box-shadow:var(--shadow2);opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s;z-index:700}
+#btt.show{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+#toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:white;padding:.65rem 1.5rem;border-radius:999px;font-size:.82rem;font-weight:500;z-index:1000;opacity:0;transition:all .3s;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ═══════════════════════════════════════════
+   SUMMARY BOX
+═══════════════════════════════════════════ */
+.summary-box{background:linear-gradient(135deg,var(--azure-pale),var(--teal-pale));border:1.5px solid var(--azure);border-radius:var(--r);padding:1.5rem;margin-top:1.25rem}
+.summary-box h4{font-family:'Cinzel',serif;color:var(--azure);margin-bottom:.85rem;font-size:1rem}
+.summary-box li{font-size:.85rem;color:var(--ink2);padding:.35rem 0;display:flex;gap:.5rem;line-height:1.5}
+.summary-box li::before{content:'✦';color:var(--azure);flex-shrink:0}
+.exam-tip{background:var(--gold-pale);border-left:4px solid var(--gold);border-radius:0 var(--r) var(--r) 0;padding:1rem 1.25rem;margin-top:1rem}
+[data-theme="dark"] .exam-tip{background:var(--gold-pale)}
+.exam-tip strong{color:var(--gold);font-size:.82rem}
+.exam-tip p{font-size:.82rem;color:var(--ink2);line-height:1.6;margin-top:.25rem}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:640px){
+  .hero{padding:1.75rem}
+  .match-area{grid-template-columns:1fr}
+  .quote-card{grid-column:span 1}
+  .timer-clock{font-size:2.8rem}
+  .cards{grid-template-columns:1fr}
+  .people-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:380px){.people-grid{grid-template-columns:1fr}}
+
+/* mark highlight */
+mark{background:var(--gold-pale);color:var(--gold);padding:0 3px;border-radius:3px}
+.tag-pill{display:inline-block;padding:.2rem .55rem;border-radius:999px;font-size:.7rem;font-weight:600;margin:.2rem}
+.tag-az{background:var(--azure-pale);color:var(--azure)}
+.tag-tl{background:var(--teal-pale);color:var(--teal)}
+.tag-gd{background:var(--gold-pale);color:var(--gold)}
+</style>
+</head>
+<body>
+
+<!-- SVG gradient for timer -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="tgrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1856a8"/>
+      <stop offset="100%" stop-color="#0b7a6e"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- BACKGROUND -->
+<div class="bg-canvas">
+  <div class="bg-orb"></div>
+  <div class="bg-orb"></div>
+  <div class="bg-orb"></div>
+</div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-icon">📚</div>
+  <div style="font-family:'Cinzel',serif;font-size:1.1rem;color:var(--ink)">Ethiopian History Master</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-text">Loading Units 4 & 5…</div>
+</div>
+
+<!-- PROGRESS BAR -->
+<div id="readprog"></div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <button class="nav-btn ham" id="ham" onclick="toggleSidebar()">☰</button>
+  <div class="nav-logo">🇪🇹 <span>History</span> Master</div>
+  <div class="nav-search">
+    <span class="si">🔍</span>
+    <input type="text" id="srch" placeholder="Search lessons, terms, events…" oninput="doSearch(this.value)" onblur="setTimeout(()=>closeDrop(),200)">
+    <div id="search-drop"></div>
+  </div>
+  <div class="nav-right">
+    <div class="timer-badge" id="sTimer" title="Study timer">⏱ <span id="sTimerVal">00:00</span></div>
+    <button class="nav-btn" onclick="showPage('timer')" title="Pomodoro timer">🍅</button>
+    <button class="nav-btn" onclick="showPage('notes')" title="Notes">📝</button>
+    <button class="nav-btn" id="dkBtn" onclick="toggleDark()" title="Dark mode">🌙</button>
+  </div>
+</nav>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<div id="sidebar">
+  <div class="sb-section">
+    <div class="sb-label">Navigation</div>
+    <button class="sb-link active" onclick="showPage('home')"><span class="dot"></span>🏠 Dashboard</button>
+    <button class="sb-link" onclick="showPage('flashall')"><span class="dot"></span>🃏 All Flashcards</button>
+    <button class="sb-link" onclick="showPage('exam')"><span class="dot"></span>📋 Final Exam</button>
+    <button class="sb-link" onclick="showPage('notes')"><span class="dot"></span>📝 My Notes</button>
+    <button class="sb-link" onclick="showPage('timer')"><span class="dot"></span>⏱ Study Timer</button>
+    <button class="sb-link" onclick="showPage('glossary')"><span class="dot"></span>📖 Glossary</button>
+  </div>
+  <div class="sb-section">
+    <div class="sb-toggle" onclick="toggleSub('sub4')">
+      <span>📜 Unit 4 — 13th–16th C.</span><span id="arr4">▾</span>
+    </div>
+    <div class="sb-sub" id="sub4">
+      <button class="sb-link" onclick="showPage('u4intro')"><span class="dot"></span>4.0 Overview</button>
+      <button class="sb-link" onclick="showPage('u41')"><span class="dot"></span>4.1 Solomonic Dynasty</button>
+      <button class="sb-link" onclick="showPage('u42')"><span class="dot"></span>4.2 Power & Expansion</button>
+      <button class="sb-link" onclick="showPage('u421')"><span class="dot"></span>4.2.1 Amba Gishen</button>
+      <button class="sb-link" onclick="showPage('u422')"><span class="dot"></span>4.2.2 Territorial Expansion</button>
+      <button class="sb-link" onclick="showPage('u423')"><span class="dot"></span>4.2.3 Zara Yaqob</button>
+      <button class="sb-link" onclick="showPage('u43')"><span class="dot"></span>4.3 Muslim Sultanates</button>
+      <button class="sb-link" onclick="showPage('u431')"><span class="dot"></span>4.3.1 Rise of Adal</button>
+      <button class="sb-link" onclick="showPage('u432')"><span class="dot"></span>4.3.2 Trade & Islam</button>
+      <button class="sb-link" onclick="showPage('u44')"><span class="dot"></span>4.4 Christian-Muslim Rivalry</button>
+      <button class="sb-link" onclick="showPage('u45')"><span class="dot"></span>4.5 External Relations</button>
+      <button class="sb-link" onclick="showPage('u4review')"><span class="dot"></span>📋 Unit 4 Review Quiz</button>
+    </div>
+  </div>
+  <div class="sb-section">
+    <div class="sb-toggle" onclick="toggleSub('sub5')">
+      <span>⚔️ Unit 5 — 16th–18th C.</span><span id="arr5">▾</span>
+    </div>
+    <div class="sb-sub" id="sub5">
+      <button class="sb-link" onclick="showPage('u5intro')"><span class="dot"></span>5.0 Overview</button>
+      <button class="sb-link" onclick="showPage('u51')"><span class="dot"></span>5.1 War with Adal</button>
+      <button class="sb-link" onclick="showPage('u52')"><span class="dot"></span>5.2 Foreign Intervention</button>
+      <button class="sb-link" onclick="showPage('u53')"><span class="dot"></span>5.3 Population Movements</button>
+      <button class="sb-link" onclick="showPage('u531')"><span class="dot"></span>5.3.1 Argoba, Afar, Somali</button>
+      <button class="sb-link" onclick="showPage('u532')"><span class="dot"></span>5.3.2 Gadaa & Oromo</button>
+      <button class="sb-link" onclick="showPage('u54')"><span class="dot"></span>5.4 Integration & Diversity</button>
+      <button class="sb-link" onclick="showPage('u55')"><span class="dot"></span>5.5 Peoples & States</button>
+      <button class="sb-link" onclick="showPage('u56')"><span class="dot"></span>5.6 Gondarine Period</button>
+      <button class="sb-link" onclick="showPage('u5review')"><span class="dot"></span>📋 Unit 5 Review Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MAIN CONTENT ═══════════ -->
+<div id="main">
+
+<!-- ══════════ HOME / DASHBOARD ══════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-eyebrow">📚 History of Ethiopia and the Horn · HIST 1012/1102</div>
+    <h1>Ethiopian History<br><em>Master Study Guide</em></h1>
+    <p>A comprehensive platform for Units 4 & 5 — covering the Solomonic dynasty through the Gondarine era. Quiz yourself, review flashcards, and track your progress.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showPage('u41')">▶ Continue Studying</button>
+      <button class="btn-ghost" onclick="showPage('exam')">📋 Take Final Exam</button>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+    <div class="dash-card">
+      <div class="dash-num" id="d-topics">22</div>
+      <div class="dash-label">Total Topics</div>
+      <div class="dash-prog"><div class="dash-fill" style="width:0%" data-target="100"></div></div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-num" id="d-flash">52</div>
+      <div class="dash-label">Flashcards</div>
+      <div class="dash-prog"><div class="dash-fill" style="width:0%" data-target="60"></div></div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-num" id="d-quiz">100+</div>
+      <div class="dash-label">Practice Questions</div>
+      <div class="dash-prog"><div class="dash-fill" style="width:0%" data-target="80"></div></div>
+    </div>
+    <div class="streak-card">
+      <div class="streak-num">🔥 1</div>
+      <div class="dash-label">Day Study Streak</div>
+      <div style="font-size:.72rem;color:var(--gold);margin-top:.35rem">Keep it up!</div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">"Until the lion learns to write, every story will glorify the hunter. Study history — own your narrative."</div>
+      <div class="quote-author">— Ethiopian Proverb, adapted</div>
+    </div>
+    <div class="dash-card" style="cursor:pointer" onclick="showPage('exam')">
+      <div class="dash-num">📋</div>
+      <div class="dash-label">Final Exam Mode</div>
+      <div style="font-size:.78rem;color:var(--azure);margin-top:.5rem;font-weight:600">100 MCQs · 50 T/F →</div>
+    </div>
+  </div>
+
+  <div class="sec-head">
+    <div class="sec-eyebrow">Quick Access</div>
+    <h2 class="sec-title">Unit 4 — Topics</h2>
+    <div class="sec-div"></div>
+  </div>
+  <div class="cards">
+    <div class="card" onclick="showPage('u41')">
+      <span class="card-icon">👑</span>
+      <div class="card-tag">4.1</div>
+      <div class="card-title">Restoration of the Solomonic Dynasty</div>
+      <div class="card-body">How Yikuno Amlak restored the Solomonic line in 1270 and the political legitimacy it gave the Christian kingdom.</div>
+      <span class="kterm">Kibre Negest</span><span class="kterm">Yikuno Amlak</span>
+    </div>
+    <div class="card" onclick="showPage('u42')">
+      <span class="card-icon">⚔️</span>
+      <div class="card-tag">4.2</div>
+      <div class="card-title">Power Struggle & Territorial Expansion</div>
+      <div class="card-body">Succession crises, the royal prison of Amba Gishen, and the expansion of the Christian kingdom southward.</div>
+      <span class="kterm">Amba Gishen</span><span class="kterm">Consolidation</span>
+    </div>
+    <div class="card" onclick="showPage('u423')">
+      <span class="card-icon">✝️</span>
+      <div class="card-tag">4.2.3</div>
+      <div class="card-title">Religious Reforms of Zara Yaqob</div>
+      <div class="card-body">Emperor Zara Yaqob's sweeping church reforms, literature, and the Fetha Negest legal code.</div>
+      <span class="kterm">Zara Yaqob</span><span class="kterm">Fetha Negest</span>
+    </div>
+    <div class="card" onclick="showPage('u431')">
+      <span class="card-icon">🌙</span>
+      <div class="card-tag">4.3.1</div>
+      <div class="card-title">Rise of Adal Sultanate</div>
+      <div class="card-body">The origins and growth of the Adal Sultanate as the dominant Muslim power in the Horn of Africa.</div>
+      <span class="kterm">Adal</span><span class="kterm">Trade routes</span>
+    </div>
+    <div class="card" onclick="showPage('u44')">
+      <span class="card-icon">🏹</span>
+      <div class="card-tag">4.4</div>
+      <div class="card-title">Christian–Muslim Rivalry</div>
+      <div class="card-body">The long-running conflict between the Christian highland kingdom and the Muslim sultanates for trade, territory, and religion.</div>
+      <span class="kterm">Rivalry</span><span class="kterm">Trade control</span>
+    </div>
+    <div class="card" onclick="showPage('u45')">
+      <span class="card-icon">🌍</span>
+      <div class="card-tag">4.5</div>
+      <div class="card-title">External Relations</div>
+      <div class="card-body">Ethiopia's diplomatic contacts with Egypt over the Nile and the church, and with Portugal for military alliances.</div>
+      <span class="kterm">Egypt</span><span class="kterm">Portugal</span>
+    </div>
+  </div>
+
+  <div class="sec-head">
+    <div class="sec-eyebrow">Quick Access</div>
+    <h2 class="sec-title">Unit 5 — Topics</h2>
+    <div class="sec-div"></div>
+  </div>
+  <div class="cards">
+    <div class="card" onclick="showPage('u51')">
+      <span class="card-icon">🔥</span>
+      <div class="card-tag">5.1</div>
+      <div class="card-title">War with the Adal Sultanate</div>
+      <div class="card-body">Ahmed Gragn's devastating campaigns across Ethiopia (1527–1543) and the near-collapse of the Christian kingdom.</div>
+      <span class="kterm">Ahmed Gragn</span><span class="kterm">1527</span>
+    </div>
+    <div class="card" onclick="showPage('u52')">
+      <span class="card-icon">⛵</span>
+      <div class="card-tag">5.2</div>
+      <div class="card-title">Foreign Intervention</div>
+      <div class="card-body">Portuguese soldiers, Ottoman support for Adal, and the Catholic Jesuit missionaries who sparked religious controversy.</div>
+      <span class="kterm">Portuguese</span><span class="kterm">Ottomans</span>
+    </div>
+    <div class="card" onclick="showPage('u532')">
+      <span class="card-icon">🐂</span>
+      <div class="card-tag">5.3.2</div>
+      <div class="card-title">Gadaa System & Oromo Movement</div>
+      <div class="card-body">The democratic Gadaa system and the massive Oromo population expansion from 1522, reshaping the Horn's demography.</div>
+      <span class="kterm">Gadaa</span><span class="kterm">Oromo</span>
+    </div>
+    <div class="card" onclick="showPage('u55')">
+      <span class="card-icon">🗺️</span>
+      <div class="card-tag">5.5</div>
+      <div class="card-title">Peoples & States</div>
+      <div class="card-body">23 distinct peoples and polities across eastern, central, southern, and western Ethiopia and the Horn.</div>
+      <span class="kterm">Somali</span><span class="kterm">Sidama</span><span class="kterm">Wolayta</span>
+    </div>
+    <div class="card" onclick="showPage('u56')">
+      <span class="card-icon">🏰</span>
+      <div class="card-tag">5.6</div>
+      <div class="card-title">Gondarine Period & Zemene Mesafint</div>
+      <div class="card-body">The golden age of Gondar's art and architecture, followed by the Era of the Princes (1769–1855) and political fragmentation.</div>
+      <span class="kterm">Gondar</span><span class="kterm">Zemene Mesafint</span>
+    </div>
+    <div class="card" onclick="showPage('u4review')">
+      <span class="card-icon">🃏</span>
+      <div class="card-tag">Practice</div>
+      <div class="card-title">Quick Review Quiz</div>
+      <div class="card-body">Test yourself with MCQs, True/False, and Matching exercises for both units.</div>
+      <span class="kterm">MCQ</span><span class="kterm">True/False</span><span class="kterm">Matching</span>
+    </div>
+  </div>
+</div><!-- /home -->
+
+<!-- ══════════════════════════════════════
+     UNIT 4 INTRO
+═══════════════════════════════════════ -->
+<div class="page" id="page-u4intro">
+  <div class="unit-badge">📜 Unit 4</div>
+  <div class="sec-head">
+    <div class="sec-eyebrow">13th – 16th Century</div>
+    <h2 class="sec-title">Politics, Economy & Society</h2>
+    <div class="sec-div"></div>
+  </div>
+  <div class="topic-wrap">
+    <div class="topic-hero"><h2>Unit Four Overview</h2><p>This unit covers the political, religious, and socio-economic developments in Ethiopia and the Horn from the late 13th to the beginning of the 16th century.</p></div>
+    <div class="content-block">
+      <h3><span class="icon">📌</span> What You Will Learn</h3>
+      <ul class="point-list">
+        <li>How the Solomonic dynasty was restored in 1270 under King Yikuno Amlak</li>
+        <li>The succession problems and why the royal prison of Amba Gishen was established</li>
+        <li>Emperor Zara Yaqob's religious reforms and literary contributions</li>
+        <li>The political and economic dynamics of the Muslim sultanates</li>
+        <li>The causes and effects of rivalry between the Christian kingdom and Muslim sultanates</li>
+        <li>Ethiopia's diplomatic relations with Egypt and Christian Europe</li>
+      </ul>
+    </div>
+    <div class="tl-wrap">
+      <div class="tl-item"><div class="tl-year">1270</div><div class="tl-title">Yikuno Amlak Takes Power</div><div class="tl-desc">Overthrows the Zagwe dynasty with church support, "restoring" the Solomonic line.</div></div>
+      <div class="tl-item"><div class="tl-year">1285–1299</div><div class="tl-title">Succession Struggles</div><div class="tl-desc">Sons and grandsons of Yikuno Amlak compete violently for the throne.</div></div>
+      <div class="tl-item"><div class="tl-year">1299</div><div class="tl-title">Amba Gishen Established</div><div class="tl-desc">Widim Ra'ad confines all male royal family members on the mountain prison.</div></div>
+      <div class="tl-item"><div class="tl-year">1434–1468</div><div class="tl-title">Reign of Zara Yaqob</div><div class="tl-desc">Major religious reforms, church unification, and literary flourishing.</div></div>
+      <div class="tl-item"><div class="tl-year">15th C</div><div class="tl-title">Rise of Adal Sultanate</div><div class="tl-desc">Adal replaces Ifat as the dominant Muslim sultanate, intensifying rivalry with the Christian kingdom.</div></div>
+      <div class="tl-item"><div class="tl-year">1450</div><div class="tl-title">Contact with Christian Europe</div><div class="tl-desc">Ethiopian delegations and European missions seek military and religious alliance.</div></div>
+    </div>
+    <button class="btn-primary" onclick="showPage('u41')" style="margin-top:1.5rem">Start with 4.1 →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     4.1 SOLOMONIC DYNASTY
+═══════════════════════════════════════ -->
+<div class="page" id="page-u41">
+  <div class="topic-wrap">
+    <div class="unit-badge">📜 4.1</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#1a2a8a,#2878d4)">
+      <h2>Restoration of the Solomonic Dynasty</h2>
+      <p>How Yikuno Amlak overthrew the Zagwe dynasty in 1270 and re-established Solomonic rule, backed by the Ethiopian Orthodox Church and the legend of the Kibre Negest.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">📖</span> Introduction & Historical Background</h3>
+      <p>The Zagwe dynasty had ruled Ethiopia for about 300 years before 1270. They were known for rock-hewn churches like Lalibela, but were criticized by the Orthodox Church for not being of Solomonic descent. <mark>Yikuno Amlak</mark> claimed direct descent from King Solomon of Israel through the son of Solomon and the Queen of Sheba — a claim legitimized by the <mark>Kibre Negest</mark> ("Glory of Kings"), Ethiopia's national epic.</p>
+      <p>The church played a decisive role: the monk Iyasus Moa and Tekle Haymanot convinced religious leaders to back Yikuno Amlak. In return, the Solomonic kings granted the church one-third of conquered lands — creating a deep political-religious alliance.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⚡</span> Causes of the Restoration</h3>
+      <ul class="point-list">
+        <li>The Zagwe rulers were considered illegitimate by the Orthodox Church due to non-Solomonic lineage</li>
+        <li>Discontent among noble families who believed in the Solomonic claim</li>
+        <li>Church support — clergy wanted a ruler who would expand Christianity and protect church lands</li>
+        <li>Regional lords were willing to support a new dynasty in exchange for autonomy</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">👑</span> Key Leaders</h3>
+      <div class="info-grid">
+        <div class="info-item"><div class="info-item-label">Yikuno Amlak (r.1270–85)</div><div class="info-item-val">Founder of the restored dynasty. Overthrew Last Zagwe king Yitbarek with church backing.</div></div>
+        <div class="info-item"><div class="info-item-label">Tekle Haymanot</div><div class="info-item-val">Famous monk and saint who persuaded the church to support Yikuno Amlak's claim.</div></div>
+        <div class="info-item"><div class="info-item-label">Iyasus Moa</div><div class="info-item-val">Another influential monk who was Yikuno Amlak's spiritual mentor and teacher.</div></div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">✨</span> Achievements & Significance</h3>
+      <ul class="point-list">
+        <li>Created the political concept of divine Solomonic kingship that lasted until Emperor Haile Selassie I (1974)</li>
+        <li>The <em>Kibre Negest</em> became the foundational text justifying Ethiopian royal authority</li>
+        <li>Established a close church-state partnership that defined Ethiopian political culture</li>
+        <li>Opened a period of territorial expansion as the Christian kingdom pushed southward</li>
+        <li>Enabled a cultural flourishing — literature, manuscripts, and the arts grew under royal patronage</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">📚</span> Key Terms</h3>
+      <div class="terms-grid">
+        <div class="term-card"><div class="term-word">Kibre Negest</div><div class="term-def">"Glory of Kings" — the Ethiopian national epic written in Ge'ez that establishes the Solomonic claim to the throne.</div></div>
+        <div class="term-card"><div class="term-word">Solomonic Dynasty</div><div class="term-def">The royal line claiming descent from King Solomon and the Queen of Sheba (Makeda). Ruled Ethiopia 1270–1974.</div></div>
+        <div class="term-card"><div class="term-word">Zagwe Dynasty</div><div class="term-def">The ruling dynasty before 1270, known for Lalibela churches but considered illegitimate by the church.</div></div>
+        <div class="term-card"><div class="term-word">Rist</div><div class="term-def">Hereditary land rights granted by the crown, used to reward church and nobility for loyalty.</div></div>
+      </div>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Yikuno Amlak overthrew the Zagwe in 1270 with church support, claiming Solomonic descent</li>
+        <li>The Kibre Negest legitimized Solomonic kingship and remained the basis of royal authority for 700 years</li>
+        <li>The church-state alliance was cemented through land grants and political cooperation</li>
+        <li>The restoration opened an era of expansion, literature, and Christian political culture</li>
+      </ul>
+    </div>
+    <div class="exam-tip"><strong>💡 Exam Tip</strong><p>Know the role of the Kibre Negest and name both Tekle Haymanot and Iyasus Moa as the monks who supported Yikuno Amlak. A common exam question asks WHY the church supported the restoration.</p></div>
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem">
+      <button class="btn-primary" onclick="showPage('u42')">Next: 4.2 Power & Expansion →</button>
+      <button class="btn-ghost" onclick="showPage('u4review')" style="background:var(--azure-pale);color:var(--azure);border-color:var(--azure)">Take Unit 4 Quiz</button>
+    </div>
+  </div>
+</div>
+
+<!-- 4.2 -->
+<div class="page" id="page-u42">
+  <div class="topic-wrap">
+    <div class="unit-badge">📜 4.2</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#1a4a8a,#0b7a6e)">
+      <h2>Power Struggle, Consolidation & Territorial Expansion</h2>
+      <p>The succession crises after Yikuno Amlak, the royal prison system, and the southward expansion of the Christian kingdom.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⚔️</span> Succession Problems</h3>
+      <p>After Yikuno Amlak died in 1285, fierce power struggles erupted among his many sons and grandsons. Between 1294 and 1299, five sons of Yegba Tsion ruled in rapid succession — a sign of deep instability. The root cause was the absence of a clear succession rule: any male of royal blood could claim the throne.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🏔️</span> Royal Prison of Amba Gishen</h3>
+      <p>During the reign of <mark>Widim Ra'ad (r.1299–1314)</mark>, all male members of the royal family were confined on the flat-topped mountain of <mark>Amba Gishen</mark> (in present-day southern Wollo). This ended succession conflicts by removing rivals from circulation. The prison continued until 1540 when the forces of Ahmed Gragn destroyed it.</p>
+      <ul class="point-list">
+        <li><strong>Advantages:</strong> Reduced violent succession disputes; maintained stability</li>
+        <li><strong>Advantages:</strong> Provided a pool of replacement kings if the ruling monarch died</li>
+        <li><strong>Disadvantages:</strong> Princes were isolated from governance and had no experience ruling</li>
+        <li><strong>Disadvantages:</strong> Princes lived in luxurious but enforced idleness, creating resentment</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🗺️</span> Territorial Expansion</h3>
+      <p>From the late 13th century onward, the Christian kingdom expanded southward into Shewa, Gojjam, and beyond, incorporating new agricultural lands and trade routes. Military campaigns brought Muslim sultanates and pagan societies under tribute. This expansion increased royal revenue, spread Christianity, and extended Amharic linguistic influence.</p>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Succession struggles plagued the early Solomonic period due to no fixed rule of inheritance</li>
+        <li>Amba Gishen prison (est. 1299) solved conflicts by confining all royal males</li>
+        <li>Territorial expansion brought wealth, trade control, and Christian missionary activity</li>
+        <li>Administration became more centralized, with provincial governors (balabats) appointed by the king</li>
+      </ul>
+    </div>
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.5rem">
+      <button class="btn-primary" onclick="showPage('u421')">Next: 4.2.1 Amba Gishen →</button>
+    </div>
+  </div>
+</div>
+
+<!-- 4.2.1 -->
+<div class="page" id="page-u421">
+  <div class="topic-wrap">
+    <div class="unit-badge">📜 4.2.1</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#2a3a70,#1856a8)">
+      <h2>Succession Problems & Royal Prison of Amba Gishen</h2>
+      <p>Why Widim Ra'ad created the mountain prison in 1299 and its lasting effects on Ethiopian royal politics.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🏔️</span> What Was Amba Gishen?</h3>
+      <p>Amba Gishen was a naturally fortified flat-topped mountain (amba) in southern Wollo. Its steep cliffs made escape nearly impossible. From 1299, it became the mandatory residence for all male members of the royal family except the reigning king.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🔍</span> Causes of Its Establishment</h3>
+      <ul class="point-list">
+        <li>Violent succession wars between 1285–1299 destabilized the kingdom</li>
+        <li>Multiple claimants meant any ambitious noble could support a rival prince to overthrow the king</li>
+        <li>The lack of primogeniture (first-born inherits) meant every male of royal blood was a potential king</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⚖️</span> Advantages vs. Disadvantages</h3>
+      <div class="info-grid">
+        <div class="info-item" style="border-left:3px solid var(--green)"><div class="info-item-label" style="color:var(--green)">Advantages</div><div class="info-item-val">Ended violent succession conflicts; provided stable government; kept a pool of heirs available</div></div>
+        <div class="info-item" style="border-left:3px solid var(--red)"><div class="info-item-label" style="color:var(--red)">Disadvantages</div><div class="info-item-val">Princes were politically inexperienced; created bitterness; ended in 1540 when Ahmed Gragn destroyed it</div></div>
+      </div>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Amba Gishen was a mountain prison for royal males, established by Widim Ra'ad in 1299</li>
+        <li>It stabilized succession but isolated princes from governance</li>
+        <li>It was destroyed by Ahmed Gragn's forces in 1540 during the wars of the 16th century</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u422')" style="margin-top:1.5rem">Next: 4.2.2 Territorial Expansion →</button>
+  </div>
+</div>
+
+<!-- 4.2.2 -->
+<div class="page" id="page-u422">
+  <div class="topic-wrap">
+    <div class="unit-badge">📜 4.2.2</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#0b5a3a,#0b7a6e)">
+      <h2>Consolidation & Territorial Expansion</h2>
+      <p>The military campaigns, southward expansion, and economic effects of the growing Christian kingdom.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⚔️</span> Military Campaigns</h3>
+      <p>From the 14th century, Solomonic kings launched systematic campaigns southward. Key rulers like Amda Tsion (r.1314–1344) were particularly aggressive, defeating Muslim sultanates (Ifat, Hadiya, Dawaro) and incorporating them as tribute-paying vassals. Amda Tsion famously stated he was "king of kings of Ethiopia."</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">💰</span> Economic Effects</h3>
+      <ul class="point-list">
+        <li>Control of south-north trade routes linking the Red Sea to sub-Saharan Africa</li>
+        <li>Tribute collection from defeated sultanates increased royal revenue</li>
+        <li>New agricultural lands in the south increased food production</li>
+        <li>Gold, ivory, and slaves from the south fed lucrative export trade</li>
+      </ul>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Amda Tsion (1314–1344) was the most expansionist Solomonic king of this period</li>
+        <li>Expansion brought trade control, tribute income, and Christian missionary extension</li>
+        <li>Provincial administration was reorganized with royally appointed governors</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u423')" style="margin-top:1.5rem">Next: 4.2.3 Zara Yaqob →</button>
+  </div>
+</div>
+
+<!-- 4.2.3 ZARA YAQOB -->
+<div class="page" id="page-u423">
+  <div class="topic-wrap">
+    <div class="unit-badge">📜 4.2.3</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#6a1a8a,#1856a8)">
+      <h2>Evangelization & Religious Reforms of Zara Yaqob</h2>
+      <p>Emperor Zara Yaqob's sweeping transformation of the Ethiopian church and society (1434–1468).</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">👑</span> Biography</h3>
+      <p><mark>Zara Yaqob</mark> (r.1434–1468, "Seed of Jacob") is regarded as one of Ethiopia's greatest emperors. A deeply devout man, he personally wrote theological texts, reformed church administration, and standardized religious practice across the empire.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">✝️</span> Religious Reforms</h3>
+      <ul class="point-list">
+        <li>Enforced the Alexandrian (Egyptian Coptic) formula for calculating Easter — unifying the church calendar</li>
+        <li>Outlawed pagan practices and imposed Christianity on all subjects, including by branding the cross on believers' foreheads and hands</li>
+        <li>Promoted the veneration of the Virgin Mary (Maryam) — a major feature of Ethiopian Christianity to this day</li>
+        <li>Organized a church council that resolved the Stepphanites controversy (regarding the Sabbath)</li>
+        <li>Built churches throughout the empire to symbolize Christian dominance</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">📜</span> Literature & Education</h3>
+      <ul class="point-list">
+        <li>Authored religious texts including <em>Metsehafe Berhan</em> ("Book of Light") and <em>Metsehafe Milad</em> ("Book of Nativity")</li>
+        <li>Patronized the production of illuminated manuscripts in Ge'ez</li>
+        <li>Compiled the <em>Fetha Negest</em> ("Law of Kings"), a comprehensive legal code combining religious and civil law</li>
+        <li>Promoted church schools to train clergy and administrators</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🌟</span> Legacy</h3>
+      <p>Zara Yaqob's reign is considered a cultural and religious golden age. His reforms gave Ethiopian Christianity its distinctive character — the deep Marian devotion, the Geez liturgy, and the church-as-record-keeper tradition all trace to his era. However, his authoritarianism (executing those who disagreed with his religious views) was also widely criticized.</p>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Zara Yaqob reigned 1434–1468 and was both emperor and theologian</li>
+        <li>He unified the church, enforced Christianity, and promoted Marian devotion</li>
+        <li>Authored the Metsehafe Berhan and compiled the Fetha Negest legal code</li>
+        <li>His religious zealotry unified the church but created resentment</li>
+      </ul>
+    </div>
+    <div class="exam-tip"><strong>💡 Exam Tip</strong><p>Know 3 specific reforms: (1) Easter calendar unification, (2) Marian devotion promotion, (3) Fetha Negest. Also know his authored texts.</p></div>
+    <button class="btn-primary" onclick="showPage('u43')" style="margin-top:1.5rem">Next: 4.3 Muslim Sultanates →</button>
+  </div>
+</div>
+
+<!-- 4.3 MUSLIM SULTANATES -->
+<div class="page" id="page-u43">
+  <div class="topic-wrap">
+    <div class="unit-badge">📜 4.3</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#1a4a0a,#2a8a1a)">
+      <h2>Political & Socio-Economic Dynamics in Muslim Sultanates</h2>
+      <p>The administration, economy, trade, and society of the Muslim sultanates in the Horn of Africa.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🏛️</span> Administration</h3>
+      <p>The Muslim sultanates (Ifat, Hadiya, Dawaro, Adal) were led by sultans who combined political and religious authority. Administration was based on Islamic law (Sharia). Governors (Amirs) managed districts and collected taxes. The sultanates were relatively decentralized with strong tribal confederations.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">💰</span> Economy & Trade</h3>
+      <ul class="point-list">
+        <li>Muslim merchants dominated the Red Sea and Indian Ocean trade networks</li>
+        <li>Major exports: gold, ivory, slaves, civet, hides from the Ethiopian interior</li>
+        <li>Imports: textiles, porcelain, spices, and metal goods from Arabia and India</li>
+        <li>The port of Zeila (Somalia) was the key commercial hub linking the interior to the sea</li>
+        <li>Muslim merchants acted as middlemen between highland Ethiopian producers and overseas buyers</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🕌</span> Religion & Society</h3>
+      <p>Islam provided cultural unity across diverse ethnic groups. Mosques, Quranic schools (madrasas), and Sufi brotherhoods spread literacy and Islamic values. Society was stratified but commercial success offered social mobility for merchants.</p>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Muslim sultanates were Islamic polities governing the eastern and southeastern lowlands</li>
+        <li>Their economic strength rested on controlling trade routes to the Red Sea</li>
+        <li>Islam provided legal, educational, and cultural cohesion</li>
+        <li>Zeila was the critical commercial port linking the region to the Indian Ocean world</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u431')" style="margin-top:1.5rem">Next: 4.3.1 Rise of Adal →</button>
+  </div>
+</div>
+
+<!-- 4.3.1 RISE OF ADAL -->
+<div class="page" id="page-u431">
+  <div class="topic-wrap">
+    <div class="unit-badge">📜 4.3.1</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#1a3a0a,#0b7a3e)">
+      <h2>The Rise of Adal</h2>
+      <p>How the Adal Sultanate emerged as the dominant Muslim power in the Horn, challenging the Christian kingdom.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🌱</span> Origins</h3>
+      <p>Adal emerged from the collapse of the Ifat Sultanate after its decisive defeat by Emperor Amda Tsion in 1332. The survivors regrouped in the Awash valley region, relocating their capital eventually to Harar. The new sultanate inherited Ifat's trade networks and anti-Ethiopian political identity.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">📈</span> Development & Leaders</h3>
+      <ul class="point-list">
+        <li><strong>Sa'ad ad-Din II</strong> — heroic sultan who fought Emperor Dawit I and was killed on the island of Zeila (1415). Became a martyr figure.</li>
+        <li><strong>Mahfuz of Adal</strong> — powerful general who launched annual raids into Ethiopia for decades</li>
+        <li><strong>Imam Ahmed Ibn Ibrahim al-Ghazi (Ahmed Gragn)</strong> — the most formidable leader, who nearly conquered all of Ethiopia in the 1530s–40s</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⚔️</span> Military Strength</h3>
+      <p>Adal's military power came from the mobile cavalry and infantry of the Afar, Somali, and Harari peoples. After connecting with the Ottoman Empire in the 16th century, Adal gained access to firearms (muskets and cannons), giving it a decisive advantage over the Ethiopian army which still used traditional weapons.</p>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Adal rose from the ashes of the Ifat Sultanate after 1332</li>
+        <li>Its capital was eventually Harar, a major center of Islamic learning</li>
+        <li>Ottoman firearms gave Adal military superiority in the 16th century</li>
+        <li>Ahmed Gragn ("the left-handed") became the greatest threat to Ethiopian sovereignty</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u432')" style="margin-top:1.5rem">Next: 4.3.2 Trade & Islam →</button>
+  </div>
+</div>
+
+<!-- 4.3.2 TRADE & ISLAM -->
+<div class="page" id="page-u432">
+  <div class="topic-wrap">
+    <div class="unit-badge">📜 4.3.2</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#0a2a4a,#1856a8)">
+      <h2>Trade & the Expansion of Islam</h2>
+      <p>How commerce and Islamic faith reinforced each other across the Horn of Africa.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🚢</span> Trade Routes</h3>
+      <ul class="point-list">
+        <li><strong>Red Sea route:</strong> Zeila → Aden → Cairo / Arabian Peninsula. The main artery for Ethiopian exports</li>
+        <li><strong>Indian Ocean route:</strong> Mogadishu → Kilwa → India. Long-distance trade in gold and ivory</li>
+        <li><strong>Interior routes:</strong> Harar → Shewa → Bale. Connected highland producers to coastal merchants</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🕌</span> Spread of Islam</h3>
+      <p>Islam spread through <mark>peaceful trade contacts</mark>, not just conquest. Muslim merchants established communities along trade routes, built mosques, and married into local families. Sufi scholars (sheikhs) set up Quranic schools. Over time, entire communities converted, especially in the eastern lowlands, Afar depression, and Somali plateau.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🎭</span> Cultural Exchange</h3>
+      <p>The trade networks created genuine cultural exchange. Ethiopian merchants adopted Arabic script for commercial records. Islamic architectural styles influenced building. Shared trade languages (and eventually Somali, Afar, and Harari lingua francas) emerged. The Harar city-state became a renowned center of Islamic learning, comparable to Timbuktu.</p>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Trade and Islam were mutually reinforcing — merchants spread the faith as they traded</li>
+        <li>Zeila was the key Red Sea port; Mogadishu connected to the Indian Ocean</li>
+        <li>Harar became a great center of Islamic scholarship in the Horn</li>
+        <li>Cultural exchange enriched both Muslim and Christian communities</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u44')" style="margin-top:1.5rem">Next: 4.4 Rivalry →</button>
+  </div>
+</div>
+
+<!-- 4.4 RIVALRY -->
+<div class="page" id="page-u44">
+  <div class="topic-wrap">
+    <div class="unit-badge">📜 4.4</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#6a0a0a,#b03030)">
+      <h2>Rivalry between the Christian Kingdom & Muslim Sultanates</h2>
+      <p>The structural conflict over trade routes, territory, and religious dominance that defined the region for centuries.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🔥</span> Causes of Rivalry</h3>
+      <ul class="point-list">
+        <li><strong>Economic:</strong> Both sides competed to control the lucrative trade routes linking the Ethiopian interior to the Red Sea coast</li>
+        <li><strong>Political:</strong> The Christian kings sought to dominate the entire Horn; the sultans resisted paying tribute</li>
+        <li><strong>Religious:</strong> Both sides used religion as an ideology to mobilize fighters and justify wars</li>
+        <li><strong>Territorial:</strong> The expanding Christian kingdom encroached on Muslim-held lowlands</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⚔️</span> Battle Comparison</h3>
+      <div style="overflow-x:auto">
+      <table class="cmp-table">
+        <tr><th>Battle/Event</th><th>Year</th><th>Outcome</th><th>Significance</th></tr>
+        <tr><td>Amda Tsion vs. Ifat</td><td>1332</td><td>Christian victory</td><td>Destroyed Ifat, scattered Muslims to Adal region</td></tr>
+        <tr><td>Dawit I kills Sa'ad ad-Din</td><td>1415</td><td>Christian victory</td><td>Sa'ad ad-Din became a Muslim martyr figure</td></tr>
+        <tr><td>Mahfuz's raids</td><td>1490s–1516</td><td>Inconclusive raids</td><td>Destabilized Ethiopian border regions</td></tr>
+        <tr><td>Ahmed Gragn invades</td><td>1527</td><td>Adal advances</td><td>Begins the great war covered in Unit 5.1</td></tr>
+      </table>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🌿</span> Long-Term Effects</h3>
+      <ul class="point-list">
+        <li>Created a durable Christian-Muslim cultural boundary in the Horn that persists today</li>
+        <li>Forged distinct Ethiopian Christian and Somali/Harari Muslim identities</li>
+        <li>Weakened both sides, creating a vacuum later filled by the Oromo population movement</li>
+        <li>Pushed Ethiopia to seek European alliances — leading to contact with Portugal</li>
+      </ul>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>The rivalry was rooted in competition for trade routes, territory, and religious authority</li>
+        <li>The Christian kingdom held the advantage in the 14th–15th centuries but Adal grew stronger in the 16th</li>
+        <li>The conflict shaped both sides' religious and political identities</li>
+        <li>It ultimately drew in outside powers (Portugal and the Ottomans) in the 16th century</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u45')" style="margin-top:1.5rem">Next: 4.5 External Relations →</button>
+  </div>
+</div>
+
+<!-- 4.5 EXTERNAL RELATIONS -->
+<div class="page" id="page-u45">
+  <div class="topic-wrap">
+    <div class="unit-badge">📜 4.5</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#0a3a6a,#2878d4)">
+      <h2>External Relations</h2>
+      <p>Ethiopia's diplomatic contacts with Egypt and Christian Europe, and how they shaped the kingdom's politics and church.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🇪🇬</span> Relations with Egypt</h3>
+      <ul class="point-list">
+        <li><strong>The Abuna (bishop) relationship:</strong> Ethiopia's Orthodox Church head (Abuna) was appointed by the Coptic Patriarch of Alexandria in Egypt — giving Egypt leverage over Ethiopian religious affairs</li>
+        <li><strong>Nile diplomacy:</strong> Ethiopia threatened to divert or dam the Nile as a diplomatic weapon against Egypt when relations deteriorated. While never executed, it was an effective threat</li>
+        <li><strong>Religious exchange:</strong> Ethiopian monks lived in Jerusalem and Cairo; Egyptian scholars visited Ethiopia</li>
+        <li>The Abuna appointment created tension when Egypt sent bishops who did not speak Ge'ez or understand local practice</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⛵</span> Relations with Christian Europe</h3>
+      <ul class="point-list">
+        <li>European crusaders and traders had long-standing interest in a legendary Christian African king — "Prester John" — who they hoped would help fight Muslims</li>
+        <li>In 1450, a Sicilian Pietro Rombulo and Ethiopian priest Fikre Mariam were sent by King Zara-Yaqob to seek European military and technical assistance</li>
+        <li>Portuguese explorers (Pero de Covilhã) reached Ethiopia in 1493 as part of their Indian Ocean strategy</li>
+        <li>Portugal sent a full embassy under Rodrigo de Lima in 1520, beginning a formal alliance</li>
+        <li>This relationship would become crucial in the 16th century when Portugal sent soldiers to help fight Ahmed Gragn</li>
+      </ul>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Ethiopia's dependence on Egypt for the Abuna gave Egypt religious leverage</li>
+        <li>Ethiopia used the Nile as a diplomatic weapon against Egypt</li>
+        <li>Europe sought Ethiopia as a Christian ally against Islam; Ethiopia sought European military technology</li>
+        <li>The Portuguese alliance initiated in the 15th century matured into military cooperation in the 16th century</li>
+      </ul>
+    </div>
+    <div class="exam-tip"><strong>💡 Exam Tip</strong><p>The two most important points: (1) the Abuna was appointed from Egypt, giving Egypt religious power over Ethiopia; (2) the Nile threat was Ethiopia's main diplomatic leverage over Egypt.</p></div>
+    <button class="btn-primary" onclick="showPage('u4review')" style="margin-top:1.5rem">📋 Take Unit 4 Review Quiz →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     UNIT 5 INTRO
+═══════════════════════════════════════ -->
+<div class="page" id="page-u5intro">
+  <div class="unit-badge" style="background:linear-gradient(135deg,#b03030,#d05020)">⚔️ Unit 5</div>
+  <div class="sec-head">
+    <div class="sec-eyebrow">16th – 18th Century</div>
+    <h2 class="sec-title">Politics, Economy & Social Processes</h2>
+    <div class="sec-div"></div>
+  </div>
+  <div class="topic-wrap">
+    <div class="topic-hero" style="background:linear-gradient(135deg,#6a1010,#c04020)"><h2>Unit Five Overview</h2><p>Covers the wars with Adal, the Oromo population movements, diverse peoples and states, and the Gondarine period through the Era of the Princes.</p></div>
+    <div class="content-block">
+      <h3><span class="icon">📌</span> What You Will Learn</h3>
+      <ul class="point-list">
+        <li>How Ahmed Gragn's campaigns nearly destroyed the Christian kingdom</li>
+        <li>The roles of Portugal and the Ottoman Empire as external interveners</li>
+        <li>The Gadaa democratic system and the Oromo population expansion (1522–1618)</li>
+        <li>The diverse peoples and states of eastern, central, southern, and western Ethiopia</li>
+        <li>The glorious Gondarine period of art, architecture, and literature</li>
+        <li>The Zemene Mesafint (Era of the Princes) and its political fragmentation</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u51')" style="margin-top:1.5rem">Start with 5.1 →</button>
+  </div>
+</div>
+
+<!-- 5.1 WAR WITH ADAL -->
+<div class="page" id="page-u51">
+  <div class="topic-wrap">
+    <div class="unit-badge" style="background:linear-gradient(135deg,#b03030,#d05020)">⚔️ 5.1</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#6a0a0a,#c03020)">
+      <h2>Conflict between the Christian Kingdom & the Sultanate of Adal</h2>
+      <p>Ahmed Gragn's devastating campaigns (1527–1543) and the near-collapse of the Ethiopian Christian state.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🔥</span> Causes of the Conflict</h3>
+      <ul class="point-list">
+        <li>Long-standing rivalry over trade routes and tribute between the Christian kingdom and Adal</li>
+        <li>Ahmed Gragn united the pastoral Somali, Afar, and Harari warriors under Islamic jihad ideology</li>
+        <li>Ottoman Empire supplied firearms (muskets, cannons) — giving Adal a decisive military advantage</li>
+        <li>Internal weakness in Ethiopia: fragmented nobility, weakened army, no firearms</li>
+        <li>Ahmed's personal charisma and military genius galvanized Muslim forces</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">👤</span> Ahmed Ibn Ibrahim al-Ghazi ("Gragn")</h3>
+      <p><mark>Ahmed Gragn</mark> ("the left-handed") was born near Hubet between Dire Dawa and Jijiga. A devout Muslim and brilliant general, he refused to pay tribute to Ethiopia in 1520 and launched campaigns from 1527. By the early 1540s, he had conquered approximately two-thirds of the Christian kingdom, burning churches and destroying monasteries.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⚔️</span> Major Battles</h3>
+      <ul class="point-list">
+        <li><strong>Battle of Shimbra Kure (1529):</strong> Ahmed defeats Emperor Lebna Dengel; Ethiopia loses many provinces</li>
+        <li><strong>Campaigns 1529–1540:</strong> Ahmed systematically conquers Shewa, Amhara, Lasta, and Tigray; Amba Gishen destroyed (1540)</li>
+        <li><strong>Arrival of Portuguese (1541):</strong> 400 musketeers under Cristóvão da Gama arrive to assist Ethiopia</li>
+        <li><strong>Battle of Wayna Daga (1543):</strong> Combined Ethiopian-Portuguese forces defeat and kill Ahmed Gragn; the war ends</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">💥</span> Consequences</h3>
+      <ul class="point-list">
+        <li>Enormous destruction of churches, monasteries, and manuscripts — irreplaceable cultural loss</li>
+        <li>Population displacement created demographic vacuum filled by the Oromo movement</li>
+        <li>Weakened both sides so severely that neither could resist the Oromo expansion</li>
+        <li>Portuguese alliance introduced firearms into Ethiopian warfare, changing military culture</li>
+        <li>Jesuits who came with the Portuguese sparked religious controversies (Unit 5.2)</li>
+      </ul>
+    </div>
+    <div class="tl-wrap">
+      <div class="tl-item"><div class="tl-year">1520</div><div class="tl-title">Ahmed refuses tribute</div><div class="tl-desc">Ahmed Gragn refuses to pay tribute to Ethiopia, begins organizing forces.</div></div>
+      <div class="tl-item"><div class="tl-year">1527</div><div class="tl-title">Invasion begins</div><div class="tl-desc">Adal forces enter Ethiopian territory. Campaign to conquer Ethiopia launches.</div></div>
+      <div class="tl-item"><div class="tl-year">1529</div><div class="tl-title">Battle of Shimbra Kure</div><div class="tl-desc">Emperor Lebna Dengel defeated; Ethiopia begins losing provinces rapidly.</div></div>
+      <div class="tl-item"><div class="tl-year">1540</div><div class="tl-title">Amba Gishen destroyed</div><div class="tl-desc">Ahmed Gragn's forces destroy the royal prison mountain.</div></div>
+      <div class="tl-item"><div class="tl-year">1541</div><div class="tl-title">Portuguese arrive</div><div class="tl-desc">400 Portuguese musketeers under Cristóvão da Gama land to support Ethiopia.</div></div>
+      <div class="tl-item"><div class="tl-year">1543</div><div class="tl-title">Battle of Wayna Daga</div><div class="tl-desc">Ahmed Gragn killed. Adal forces retreat. Ethiopian kingdom restored.</div></div>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Ahmed Gragn united Muslim forces under jihad ideology and Ottoman firearms</li>
+        <li>Ethiopia lost 2/3 of its territory between 1527–1543</li>
+        <li>Portuguese intervention was decisive — the combined force killed Ahmed at Wayna Daga in 1543</li>
+        <li>The war's devastation weakened both sides and enabled the Oromo population movement</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u52')" style="margin-top:1.5rem">Next: 5.2 Foreign Intervention →</button>
+  </div>
+</div>
+
+<!-- 5.2 FOREIGN INTERVENTION -->
+<div class="page" id="page-u52">
+  <div class="topic-wrap">
+    <div class="unit-badge" style="background:linear-gradient(135deg,#b03030,#d05020)">⚔️ 5.2</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#1a3060,#2878d4)">
+      <h2>Foreign Intervention & Religious Controversies</h2>
+      <p>Portugal, the Ottoman Empire, and the Jesuits — how external powers reshaped 16th-century Ethiopia.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⛵</span> Portuguese Intervention</h3>
+      <ul class="point-list">
+        <li>Portugal sent 400 musketeers under Cristóvão da Gama in 1541 as part of its Indian Ocean strategy</li>
+        <li>The Portuguese introduced firearms into Ethiopian warfare permanently</li>
+        <li>Cristóvão da Gama was captured and executed by Ahmed Gragn in 1542 — but remaining Portuguese helped defeat Adal at Wayna Daga (1543)</li>
+        <li>The Portuguese military presence came with Catholic missionaries — the Jesuits</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🌙</span> Ottoman Empire</h3>
+      <ul class="point-list">
+        <li>Ottomans supported Adal with firearms (muskets and cannons) through Yemen</li>
+        <li>Ottoman control of the Red Sea threatened Ethiopian trade and access to the coast</li>
+        <li>After Ahmed Gragn's death, the Ottoman Empire occupied parts of northern Ethiopia (Massawa area)</li>
+        <li>The Ottoman threat pushed Ethiopia further inland, away from the coast</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">✝️</span> Jesuit Missionaries & Religious Controversies</h3>
+      <p>The Jesuit missionaries who came with Portugal tried to convert Ethiopian emperors to Roman Catholicism. <mark>Emperor Susenyos (r.1606–1632)</mark> converted to Catholicism in 1622 and tried to impose it on the Ethiopian Orthodox population — causing a popular uprising. He abdicated in 1632 after acknowledging that his conversion was rejected. His son <mark>Fasiladas</mark> expelled all Catholics and restored Orthodoxy, then built the famous Gondar castles.</p>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Portugal helped defeat Ahmed Gragn in 1543 but brought Catholic missionaries who caused controversy</li>
+        <li>The Ottomans armed Adal and occupied northern Ethiopia after the wars</li>
+        <li>Emperor Susenyos converted to Catholicism (1622) causing civil war; he abdicated in 1632</li>
+        <li>Fasiladas expelled Jesuits and restored Orthodoxy, beginning the Gondarine golden age</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u53')" style="margin-top:1.5rem">Next: 5.3 Population Movements →</button>
+  </div>
+</div>
+
+<!-- 5.3 POPULATION MOVEMENTS -->
+<div class="page" id="page-u53">
+  <div class="topic-wrap">
+    <div class="unit-badge" style="background:linear-gradient(135deg,#b03030,#d05020)">⚔️ 5.3</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#0a4a2a,#0b7a4e)">
+      <h2>Population Movements</h2>
+      <p>The massive demographic shifts of the 16th century that permanently reshaped the Horn of Africa.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🗺️</span> Causes</h3>
+      <ul class="point-list">
+        <li>Devastation of the Ahmed Gragn wars (1527–1543) depopulated vast areas</li>
+        <li>Ecological pressure — drought, livestock disease, and competition for pasture land</li>
+        <li>The Gadaa military system encouraged Oromo age-grades to seek new territories for cattle and farming</li>
+        <li>Collapse of centralized control left frontiers undefended</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🌊</span> Effects</h3>
+      <ul class="point-list">
+        <li>Permanent demographic transformation of the Horn — Oromo became one of the largest populations</li>
+        <li>New political entities emerged as migrating groups established their own governance</li>
+        <li>Cultural mixing: Oromo, Amhara, Somali, and Sidama traditions blended in new areas</li>
+        <li>Trade routes shifted; some regions declined, others rose in importance</li>
+        <li>New languages spread: Oromo (Afaan Oromo) became a major regional lingua franca</li>
+      </ul>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>The wars and ecological pressure of the 16th century triggered massive population movements</li>
+        <li>The Oromo expansion was the most demographically significant, reaching from Bale to Tigray by 1618</li>
+        <li>These movements permanently reshaped the ethnic, linguistic, and political map of Ethiopia</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u531')" style="margin-top:1.5rem">Next: 5.3.1 Argoba, Afar & Somali →</button>
+  </div>
+</div>
+
+<!-- 5.3.1 -->
+<div class="page" id="page-u531">
+  <div class="topic-wrap">
+    <div class="unit-badge" style="background:linear-gradient(135deg,#b03030,#d05020)">⚔️ 5.3.1</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#0a2a4a,#1856a8)">
+      <h2>Population Movements of the Argoba, Afar & Somali</h2>
+      <p>Three peoples whose migrations shaped the eastern and northeastern Horn.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🐪</span> The Afar People</h3>
+      <ul class="point-list">
+        <li><strong>Origin:</strong> Cushitic-speaking pastoralists of the Afar triangle (Djibouti, Eritrea, Ethiopia)</li>
+        <li><strong>Migration:</strong> Expanded southward and westward as pastoralists following water and pasture</li>
+        <li><strong>Economy:</strong> Camel and goat herding; control of the Danakil salt trade (major export)</li>
+        <li><strong>Religion:</strong> Islam, adopted through trade contact with Arabian merchants</li>
+        <li><strong>Importance:</strong> Controlled access to the Awash valley and salt routes crucial for interior trade</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🌊</span> The Somali People</h3>
+      <ul class="point-list">
+        <li><strong>Origin:</strong> Cushitic pastoralists of the Somali plateau and coastal regions</li>
+        <li><strong>Migration:</strong> Expanded westward into the Ogaden and beyond, driven by population growth and pasture needs</li>
+        <li><strong>Economy:</strong> Camel herding; coastal trade through Zeila and Mogadishu</li>
+        <li><strong>Religion:</strong> Islam, spread early through Red Sea trading contacts</li>
+        <li><strong>Importance:</strong> Somali warriors formed the backbone of Ahmed Gragn's army; Somali expansion into Ogaden created a permanent demographic shift</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🏘️</span> The Argoba People</h3>
+      <ul class="point-list">
+        <li><strong>Origin:</strong> Semitic-speaking settled farmers along the Awash valley and its escarpments</li>
+        <li><strong>Migration:</strong> Disrupted by the Ahmed Gragn wars, many Argoba communities relocated northward</li>
+        <li><strong>Economy:</strong> Agriculture; important role as trade intermediaries in the Awash valley</li>
+        <li><strong>Religion:</strong> Islam, adopted early due to proximity to Muslim trade routes</li>
+        <li><strong>Importance:</strong> One of the earliest Semitic-speaking groups to adopt Islam; maintain distinct identity in modern Afar and Amhara regions</li>
+      </ul>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>All three groups expanded during the demographic disruption of the 16th century</li>
+        <li>The Afar controlled salt and Awash trade; the Somali expanded into the Ogaden; the Argoba were displaced by the wars</li>
+        <li>Islam was a common thread linking all three communities</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u532')" style="margin-top:1.5rem">Next: 5.3.2 Gadaa & Oromo →</button>
+  </div>
+</div>
+
+<!-- 5.3.2 GADAA & OROMO -->
+<div class="page" id="page-u532">
+  <div class="topic-wrap">
+    <div class="unit-badge" style="background:linear-gradient(135deg,#b03030,#d05020)">⚔️ 5.3.2</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#0a4a1a,#1a8a3a)">
+      <h2>Gadaa System & Oromo Population Movement</h2>
+      <p>The democratic Gadaa governance system and the transformative Oromo expansion across the Horn (1522–1618).</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⚖️</span> A. The Gadaa System</h3>
+      <p>The <mark>Gadaa system</mark> is the indigenous democratic governance, law, and social organization system of the Oromo people. It is based on <strong>age-grades</strong> — all Oromo males born within an 8-year period form a "class" that moves together through defined life stages.</p>
+      <div class="info-grid">
+        <div class="info-item"><div class="info-item-label">Age Grade Stages</div><div class="info-item-val">Daballe (0–8), Folle (8–16), Qondala (16–24), Raba (24–32), Gadaa (32–40), Yuba (40+)</div></div>
+        <div class="info-item"><div class="info-item-label">The Gadaa Grade (32–40)</div><div class="info-item-val">This 8-year period is when a class holds political, military, and judicial power over Oromo society</div></div>
+        <div class="info-item"><div class="info-item-label">Abba Gadaa</div><div class="info-item-val">The elected leader of the Gadaa grade — serves as head of government for 8 years; cannot be re-elected</div></div>
+        <div class="info-item"><div class="info-item-label">Democratic Features</div><div class="info-item-val">Term limits, rule of law, checks on power, equal participation, transparent elections, peaceful transfer</div></div>
+      </div>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">📜</span> Laws & Governance</h3>
+      <ul class="point-list">
+        <li>Laws made at the Gumii Gaayo (General Assembly) — an open parliament held every 8 years</li>
+        <li>No leader can serve more than one Gadaa period (8 years) — a form of term limit</li>
+        <li>Women had a recognized status as advisers through the institution of the Siqqee</li>
+        <li>Economic resources were managed communally; land was not privately owned</li>
+        <li>The Gadaa system was recognized by UNESCO as an Intangible Cultural Heritage in 2016</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🌊</span> B. The Oromo Population Movement (1522–1618)</h3>
+      <p>Starting around 1522, Oromo communities began a massive expansion from their original homeland in the Bale and Borena areas. The Gadaa military system organized young men (<em>luba</em>) into effective fighting units that pushed in multiple directions simultaneously.</p>
+      <ul class="point-list">
+        <li><strong>Causes:</strong> Population growth, cattle-driven need for new pasture land, ecological pressure, the power vacuum left by the Ahmed Gragn wars</li>
+        <li><strong>Routes:</strong> Northward into Shewa, Wello, and Tigray; westward into Kaffa and Gojjam; eastward into Harar and Bale</li>
+        <li><strong>Speed:</strong> By 1618, Oromo groups had reached as far north as Tigray — a 1,000km+ expansion in under 100 years</li>
+        <li><strong>Integration:</strong> Oromo did not simply replace existing populations — they assimilated, intermarried, and created new hybrid cultures</li>
+      </ul>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Gadaa is a democratic age-grade system — governance, law, and social life organized by 8-year cycles</li>
+        <li>The Abba Gadaa is an elected leader with a single non-renewable term — a genuine ancient democracy</li>
+        <li>Oromo expansion (1522–1618) was the largest demographic movement in Horn of Africa history</li>
+        <li>The expansion was enabled by the power vacuum of the Ahmed Gragn wars and the Gadaa military system</li>
+        <li>UNESCO recognized the Gadaa system as an Intangible Cultural Heritage in 2016</li>
+      </ul>
+    </div>
+    <div class="exam-tip"><strong>💡 Exam Tip</strong><p>Know what Gadaa is, name the Gadaa grade (32–40 years), and explain why the Oromo expansion happened in 1522. The UNESCO recognition date (2016) is often asked.</p></div>
+    <button class="btn-primary" onclick="showPage('u54')" style="margin-top:1.5rem">Next: 5.4 Integration & Diversity →</button>
+  </div>
+</div>
+
+<!-- 5.4 INTEGRATION -->
+<div class="page" id="page-u54">
+  <div class="topic-wrap">
+    <div class="unit-badge" style="background:linear-gradient(135deg,#b03030,#d05020)">⚔️ 5.4</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#6a4a0a,#c8860e)">
+      <h2>Interaction & Integration across Ethnic & Religious Diversities</h2>
+      <p>How diverse peoples of the Horn interacted, traded, and built shared cultures.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🤝</span> Forms of Interaction</h3>
+      <ul class="point-list">
+        <li><strong>Trade:</strong> Markets and trading towns were multicultural meeting points; merchants of all backgrounds exchanged goods</li>
+        <li><strong>Intermarriage:</strong> Cross-ethnic marriage was common, especially among ruling families seeking alliances</li>
+        <li><strong>Religious accommodation:</strong> Christians, Muslims, and followers of traditional religions often lived in the same areas</li>
+        <li><strong>Language mixing:</strong> Lingua francas emerged (Amharic, Somali, Afaan Oromo) enabling communication across groups</li>
+        <li><strong>Cultural borrowing:</strong> Musical traditions, agricultural techniques, architectural styles, and religious practices were shared</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⚖️</span> Tensions & Boundaries</h3>
+      <p>Integration was not without conflict. Religious identity could be a sharp boundary: forced conversion by Christian kings created resentment. Land competition between expanding Oromo pastoralists and settled farmers created friction. Yet over time, even these encounters led to creative synthesis — new mixed communities, hybrid languages (like the Oromo-Amharic speaking Amhara-Oromo borderland communities), and syncretic religious practices.</p>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Interaction was driven primarily by trade, which required peaceful exchange</li>
+        <li>Intermarriage, cultural borrowing, and lingua francas facilitated integration</li>
+        <li>While conflicts occurred, the long-term result was a richly diverse, hybrid culture</li>
+      </ul>
+    </div>
+    <button class="btn-primary" onclick="showPage('u55')" style="margin-top:1.5rem">Next: 5.5 Peoples & States →</button>
+  </div>
+</div>
+
+<!-- 5.5 PEOPLES AND STATES -->
+<div class="page" id="page-u55">
+  <div class="unit-badge" style="background:linear-gradient(135deg,#b03030,#d05020)">⚔️ 5.5</div>
+  <div class="sec-head">
+    <div class="sec-eyebrow">Unit 5.5</div>
+    <h2 class="sec-title">Peoples & States across the Horn</h2>
+    <div class="sec-div"></div>
+  </div>
+  <p style="color:var(--ink2);font-size:.88rem;margin-bottom:1.5rem">The following peoples and polities existed across eastern, central, southern, and western Ethiopia and the Horn during this period. Each had distinct political organization, economy, culture, and religion.</p>
+  <div class="people-grid" id="peoples-grid"></div>
+</div>
+
+<!-- 5.6 GONDARINE PERIOD -->
+<div class="page" id="page-u56">
+  <div class="topic-wrap">
+    <div class="unit-badge" style="background:linear-gradient(135deg,#6a4a0a,#c8860e)">🏰 5.6</div>
+    <div class="topic-hero" style="background:linear-gradient(135deg,#4a2a0a,#c8860e)">
+      <h2>The Gondarine Period & Zemene Mesafint</h2>
+      <p>Ethiopia's cultural golden age under the Gondarine emperors, followed by the Era of the Princes and political fragmentation.</p>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🏰</span> The Gondarine Period (1636–1769)</h3>
+      <p><mark>Emperor Fasiladas</mark> founded the city of Gondar in 1636 as a permanent capital — Ethiopia's first fixed capital. He and his successors built an impressive complex of castles (Fasil Ghebbi), churches, and baths that blend Ethiopian, Portuguese, Indian, and Islamic architectural styles.</p>
+      <ul class="point-list">
+        <li><strong>Political achievements:</strong> Fasiladas expelled the Jesuits and restored Orthodoxy; created stable administration</li>
+        <li><strong>Architecture:</strong> Fasil Ghebbi (Royal Enclosure) with 6 castles — now a UNESCO World Heritage Site</li>
+        <li><strong>Literature:</strong> Flowering of Amharic and Ge'ez religious and secular literature; royal chronicles</li>
+        <li><strong>Art:</strong> The distinctive Gondarine painting style — large, round eyes, elaborate patterns, bright colors</li>
+        <li><strong>Trade:</strong> Gondar became a major commercial hub linking the Red Sea coast to the western Sudan</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">⚡</span> The Zemene Mesafint — Era of the Princes (1769–1855)</h3>
+      <p>After Emperor Iyoas I was deposed and killed in 1769, the great nobles (Rases) took control of the government. For nearly a century, emperors were puppets controlled by regional warlords, principally the Ras of Tigray, the Ras of Begemder, and the Yejju Oromo dynasty.</p>
+      <ul class="point-list">
+        <li><strong>Causes:</strong> Weak emperors, powerful nobles, religious controversy (Catholic vs. Orthodox), ethnic tensions</li>
+        <li><strong>Major "kingmakers":</strong> Ras Mikael Sehul (killed Emperor Iyoas), the Yejju dynasty (who converted to Christianity for political power)</li>
+        <li><strong>Consequences:</strong> Political fragmentation, trade disruption, religious controversy, regional wars</li>
+        <li><strong>End:</strong> Kassa Hailu (Emperor Tewodros II) defeated the last Ras in 1855, reunifying Ethiopia and beginning the modern period</li>
+      </ul>
+    </div>
+    <div class="content-block">
+      <h3><span class="icon">🕊️</span> Religious Controversies of the Gondarine Period</h3>
+      <p>Two theological controversies divided the Ethiopian church in this period: the Ye-tsega or Sost Lidat ("Three Births") controversy about the nature of Christ, and debates about the Sabbath. These became tools for political factions — different noble houses backed different theological positions to gain church support.</p>
+    </div>
+    <div class="summary-box">
+      <h4>📋 Summary</h4>
+      <ul class="point-list">
+        <li>Fasiladas founded Gondar in 1636 — Ethiopia's first permanent capital; expelled Jesuits and restored Orthodoxy</li>
+        <li>Gondar's castles, painting, literature, and trade represent a cultural golden age</li>
+        <li>The Zemene Mesafint (1769–1855) was an era of noble dominance and imperial weakness</li>
+        <li>Emperor Tewodros II ended the Era of the Princes in 1855 and reunified Ethiopia</li>
+      </ul>
+    </div>
+    <div class="exam-tip"><strong>💡 Exam Tip</strong><p>Know the founder of Gondar (Fasiladas, 1636), the UNESCO designation for Fasil Ghebbi, and the dates 1769–1855 for Zemene Mesafint. Tewodros II ending the era is always examinable.</p></div>
+    <button class="btn-primary" onclick="showPage('u5review')" style="margin-top:1.5rem">📋 Take Unit 5 Review Quiz →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     UNIT 4 REVIEW QUIZ
+═══════════════════════════════════════ -->
+<div class="page" id="page-u4review">
+  <div class="sec-head">
+    <div class="unit-badge">📋 Unit 4 Quiz</div>
+    <h2 class="sec-title">Unit 4 Review — Test Yourself</h2>
+    <div class="sec-div"></div>
+  </div>
+  <div class="quiz-tabs">
+    <button class="qtab on" data-tab="q4mc">Multiple Choice (10)</button>
+    <button class="qtab" data-tab="q4tf">True / False (8)</button>
+    <button class="qtab" data-tab="q4match">Matching</button>
+  </div>
+  <div class="qpanel on" id="panel-q4mc"><div id="q4mc-qs"></div><button class="quiz-submit" onclick="gradeQuiz('q4mc')">Submit & Score ✓</button><div class="score-box" id="score-q4mc"><div class="score-big" id="q4mc-snum"></div><div class="score-progbar"><div class="score-fill" id="q4mc-sbar" style="width:0%"></div></div><div class="score-sub">Unit 4 Multiple Choice</div><div class="score-msg" id="q4mc-smsg"></div><button class="retry-btn" onclick="retryQuiz('q4mc')">↺ Retry</button></div></div>
+  <div class="qpanel" id="panel-q4tf"><div id="q4tf-qs"></div><button class="quiz-submit" onclick="gradeQuiz('q4tf')">Submit & Score ✓</button><div class="score-box" id="score-q4tf"><div class="score-big" id="q4tf-snum"></div><div class="score-progbar"><div class="score-fill" id="q4tf-sbar" style="width:0%"></div></div><div class="score-sub">Unit 4 True/False</div><div class="score-msg" id="q4tf-smsg"></div><button class="retry-btn" onclick="retryQuiz('q4tf')">↺ Retry</button></div></div>
+  <div class="qpanel" id="panel-q4match"><div id="q4match-qs"></div><button class="quiz-submit" onclick="gradeQuiz('q4match')">Check Matches ✓</button><div class="score-box" id="score-q4match"><div class="score-big" id="q4match-snum"></div><div class="score-progbar"><div class="score-fill" id="q4match-sbar" style="width:0%"></div></div><div class="score-sub">Unit 4 Matching</div><div class="score-msg" id="q4match-smsg"></div><button class="retry-btn" onclick="retryQuiz('q4match')">↺ Retry</button></div></div>
+</div>
+
+<!-- UNIT 5 REVIEW QUIZ -->
+<div class="page" id="page-u5review">
+  <div class="sec-head">
+    <div class="unit-badge" style="background:linear-gradient(135deg,#b03030,#d05020)">📋 Unit 5 Quiz</div>
+    <h2 class="sec-title">Unit 5 Review — Test Yourself</h2>
+    <div class="sec-div"></div>
+  </div>
+  <div class="quiz-tabs">
+    <button class="qtab on" data-tab="q5mc">Multiple Choice (10)</button>
+    <button class="qtab" data-tab="q5tf">True / False (8)</button>
+    <button class="qtab" data-tab="q5match">Matching</button>
+  </div>
+  <div class="qpanel on" id="panel-q5mc"><div id="q5mc-qs"></div><button class="quiz-submit" onclick="gradeQuiz('q5mc')">Submit & Score ✓</button><div class="score-box" id="score-q5mc"><div class="score-big" id="q5mc-snum"></div><div class="score-progbar"><div class="score-fill" id="q5mc-sbar" style="width:0%"></div></div><div class="score-sub">Unit 5 Multiple Choice</div><div class="score-msg" id="q5mc-smsg"></div><button class="retry-btn" onclick="retryQuiz('q5mc')">↺ Retry</button></div></div>
+  <div class="qpanel" id="panel-q5tf"><div id="q5tf-qs"></div><button class="quiz-submit" onclick="gradeQuiz('q5tf')">Submit & Score ✓</button><div class="score-box" id="score-q5tf"><div class="score-big" id="q5tf-snum"></div><div class="score-progbar"><div class="score-fill" id="q5tf-sbar" style="width:0%"></div></div><div class="score-sub">Unit 5 True/False</div><div class="score-msg" id="q5tf-smsg"></div><button class="retry-btn" onclick="retryQuiz('q5tf')">↺ Retry</button></div></div>
+  <div class="qpanel" id="panel-q5match"><div id="q5match-qs"></div><button class="quiz-submit" onclick="gradeQuiz('q5match')">Check Matches ✓</button><div class="score-box" id="score-q5match"><div class="score-big" id="q5match-snum"></div><div class="score-progbar"><div class="score-fill" id="q5match-sbar" style="width:0%"></div></div><div class="score-sub">Unit 5 Matching</div><div class="score-msg" id="q5match-smsg"></div><button class="retry-btn" onclick="retryQuiz('q5match')">↺ Retry</button></div></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     ALL FLASHCARDS
+═══════════════════════════════════════ -->
+<div class="page" id="page-flashall">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Revision Tool</div>
+    <h2 class="sec-title">🃏 All Flashcards</h2>
+    <div class="sec-div"></div>
+  </div>
+  <div class="fc-nav">
+    <button class="fc-btn" id="fc-unit-all" onclick="filterFC('all')" style="background:var(--azure);color:white;border-color:var(--azure)">All (52)</button>
+    <button class="fc-btn" id="fc-unit-4" onclick="filterFC('4')">Unit 4</button>
+    <button class="fc-btn" id="fc-unit-5" onclick="filterFC('5')">Unit 5</button>
+    <span class="fc-counter" id="fc-ctr">1 / 52</span>
+  </div>
+  <div class="fc-prog"><div class="fc-prog-fill" id="fc-prog-fill" style="width:2%"></div></div>
+  <div class="fc-area"><div class="fc-inner" id="fc-card" onclick="flipFC()">
+    <div class="fc-f" id="fc-front"><div class="fc-label">Question</div><div class="fc-text" id="fc-q-text">Loading…</div><div class="fc-hint">Tap to flip</div></div>
+    <div class="fc-b" id="fc-back"><div class="fc-label">Answer</div><div class="fc-text" id="fc-a-text"></div></div>
+  </div></div>
+  <div class="fc-controls">
+    <button class="fc-btn" onclick="prevFC()">← Previous</button>
+    <button class="fc-btn" onclick="flipFC()">🔄 Flip</button>
+    <button class="fc-btn" onclick="nextFC()">Next →</button>
+    <button class="fc-btn" onclick="shuffleFC()">🔀 Shuffle</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     GLOSSARY
+═══════════════════════════════════════ -->
+<div class="page" id="page-glossary">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Reference</div>
+    <h2 class="sec-title">📖 Complete Glossary</h2>
+    <div class="sec-div"></div>
+  </div>
+  <div class="terms-grid" id="glossary-grid"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FINAL EXAM
+═══════════════════════════════════════ -->
+<div class="page" id="page-exam">
+  <div class="exam-banner">
+    <h2>📋 Final Exam Mode</h2>
+    <p>Complete practice exam covering both Units 4 & 5</p>
+    <div class="exam-info-row">
+      <span class="exam-badge">📝 30 MCQs</span>
+      <span class="exam-badge">✓ 20 True/False</span>
+      <span class="exam-badge">🔗 10 Matching</span>
+      <span class="exam-badge">⏱ No time limit</span>
+    </div>
+  </div>
+  <div class="quiz-tabs">
+    <button class="qtab on" data-tab="exmc">MCQ (30)</button>
+    <button class="qtab" data-tab="extf">True/False (20)</button>
+    <button class="qtab" data-tab="exmatch">Matching</button>
+  </div>
+  <div class="qpanel on" id="panel-exmc"><div id="exmc-qs"></div><button class="quiz-submit" onclick="gradeQuiz('exmc')">Submit Exam ✓</button><div class="score-box" id="score-exmc"><div class="score-big" id="exmc-snum"></div><div class="score-progbar"><div class="score-fill" id="exmc-sbar" style="width:0%"></div></div><div class="score-sub">Final Exam MCQ Score</div><div class="score-msg" id="exmc-smsg"></div><button class="retry-btn" onclick="retryQuiz('exmc')">↺ Retry</button></div></div>
+  <div class="qpanel" id="panel-extf"><div id="extf-qs"></div><button class="quiz-submit" onclick="gradeQuiz('extf')">Submit ✓</button><div class="score-box" id="score-extf"><div class="score-big" id="extf-snum"></div><div class="score-progbar"><div class="score-fill" id="extf-sbar" style="width:0%"></div></div><div class="score-sub">Final Exam True/False</div><div class="score-msg" id="extf-smsg"></div><button class="retry-btn" onclick="retryQuiz('extf')">↺ Retry</button></div></div>
+  <div class="qpanel" id="panel-exmatch"><div id="exmatch-qs"></div><button class="quiz-submit" onclick="gradeQuiz('exmatch')">Check ✓</button><div class="score-box" id="score-exmatch"><div class="score-big" id="exmatch-snum"></div><div class="score-progbar"><div class="score-fill" id="exmatch-sbar" style="width:0%"></div></div><div class="score-sub">Matching Score</div><div class="score-msg" id="exmatch-smsg"></div><button class="retry-btn" onclick="retryQuiz('exmatch')">↺ Retry</button></div></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     NOTES
+═══════════════════════════════════════ -->
+<div class="page" id="page-notes">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Personal Notes</div>
+    <h2 class="sec-title">📝 My Study Notes</h2>
+    <div class="sec-div"></div>
+  </div>
+  <div style="display:flex;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap">
+    <button class="fc-btn" onclick="saveNotes()" style="background:var(--azure);color:white;border-color:var(--azure)">💾 Save Notes</button>
+    <button class="fc-btn" onclick="clearNotes()">🗑️ Clear</button>
+    <button class="fc-btn" onclick="printNotes()">🖨️ Print</button>
+  </div>
+  <textarea class="notes-area" id="notes-ta" placeholder="Write your study notes here… They are saved automatically in your browser."></textarea>
+  <div style="font-size:.75rem;color:var(--ink3);margin-top:.5rem" id="notes-saved"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TIMER
+═══════════════════════════════════════ -->
+<div class="page" id="page-timer">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Focus Tool</div>
+    <h2 class="sec-title">⏱ Pomodoro Study Timer</h2>
+    <div class="sec-div"></div>
+  </div>
+  <div class="timer-wrap">
+    <div class="pomo-mode">
+      <button class="pomo-btn on" onclick="setMode(25,'Focus')" id="pomo-focus">🍅 Focus (25m)</button>
+      <button class="pomo-btn" onclick="setMode(5,'Short Break')" id="pomo-short">☕ Short Break (5m)</button>
+      <button class="pomo-btn" onclick="setMode(15,'Long Break')" id="pomo-long">🌿 Long Break (15m)</button>
+    </div>
+    <div class="timer-ring">
+      <svg viewBox="0 0 200 200" width="200" height="200">
+        <circle class="bg" cx="100" cy="100" r="88" stroke-dasharray="553" stroke-dashoffset="0"/>
+        <circle class="fg" cx="100" cy="100" r="88" stroke-dasharray="553" stroke-dashoffset="0" id="timer-arc"/>
+      </svg>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
+        <div class="timer-clock" id="tmr-display">25:00</div>
+        <div class="timer-label" id="tmr-label">Focus</div>
+      </div>
+    </div>
+    <div class="timer-btns">
+      <button class="t-go" onclick="startTimer()">▶ Start</button>
+      <button onclick="pauseTimer()">⏸ Pause</button>
+      <button onclick="resetTimer()">↺ Reset</button>
+    </div>
+    <div style="font-size:.82rem;color:var(--ink3)">🔔 A bell will ring when the timer ends</div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- BACK TO TOP -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- ═══════════════════ JS ═══════════════════ -->
+<script>
+// ══════════ DATA ══════════
+const PEOPLES = [
+  {name:"Somali",loc:"Somali Plateau, Ogaden",eco:"Camel herding, coastal trade",rel:"Islam",pol:"Clan confederacies, sultans",flag:"🐪",tag:"Eastern"},
+  {name:"Afar",loc:"Afar Triangle (Djibouti/Ethiopia)",eco:"Camel herding, Danakil salt trade",rel:"Islam",pol:"Sultanate of Awsa",flag:"🌵",tag:"Eastern"},
+  {name:"Argoba",loc:"Awash valley escarpments",eco:"Agriculture, trade intermediaries",rel:"Islam",pol:"Village communities",flag:"🌾",tag:"Eastern"},
+  {name:"Emirate of Harar",loc:"Harar city & surroundings",eco:"Coffee, trade, crafts",rel:"Islam (major center)",pol:"Emirate (elected Emir)",flag:"🕌",tag:"Eastern"},
+  {name:"Shewa",loc:"Central Ethiopia plateau",eco:"Agriculture, trade",rel:"Christianity & Islam",pol:"Kingdom of Shewa",flag:"🏔️",tag:"Central"},
+  {name:"Gurage",loc:"Southwest of Addis Ababa",eco:"Enset farming, trade",rel:"Christianity, Islam, traditional",pol:"Federated clans",flag:"🍌",tag:"Central"},
+  {name:"Kambata",loc:"Southern-central Ethiopia",eco:"Agriculture, salt trade",rel:"Christianity (early convert)",pol:"Hereditary kingship",flag:"🌿",tag:"Central"},
+  {name:"Hadiya",loc:"Southern-central Ethiopia",eco:"Agriculture, livestock",rel:"Islam, Christianity",pol:"Sultans, later chieftains",flag:"🐄",tag:"Central"},
+  {name:"Sidama",loc:"Southern Ethiopia (Sidama zone)",eco:"Enset, coffee farming",rel:"Traditional, Christianity",pol:"Age-grade system",flag:"☕",tag:"Southern"},
+  {name:"Gedeo",loc:"Southern Ethiopia (Gedeo zone)",eco:"Coffee, enset farming",rel:"Traditional, Christianity",pol:"Council of elders",flag:"🌱",tag:"Southern"},
+  {name:"Konso",loc:"Southern Ethiopia (Konso zone)",eco:"Terraced farming, cotton",rel:"Traditional religion",pol:"Poqalla hereditary leaders",flag:"🏗️",tag:"Southern"},
+  {name:"Wolayta",loc:"Southern Ethiopia (SNNPR)",eco:"Agriculture, livestock",rel:"Traditional, Christianity",pol:"Monarchy (Kawo kingdom)",flag:"🌄",tag:"Southwestern"},
+  {name:"Kafa",loc:"Southwestern Ethiopia",eco:"Coffee (birthplace!), spices",rel:"Traditional, Christianity",pol:"Hereditary monarchy (Tato)",flag:"☕",tag:"Southwestern"},
+  {name:"Yem",loc:"Southwestern Ethiopia",eco:"Agriculture, honey",rel:"Traditional, Christianity",pol:"Chieftaincy system",flag:"🍯",tag:"Southwestern"},
+  {name:"Gamo",loc:"Southern Ethiopia (Gamo-Gofa)",eco:"Weaving, agriculture",rel:"Traditional, Christianity",pol:"Council of elected leaders",flag:"🧵",tag:"Southwestern"},
+  {name:"Dawuro",loc:"Southwest Ethiopia",eco:"Agriculture, crafts",rel:"Traditional",pol:"Chieftaincy",flag:"🏺",tag:"Southwestern"},
+  {name:"Ari",loc:"Southwest Ethiopia (South Omo)",eco:"Agriculture, beekeeping",rel:"Traditional",pol:"Clan leaders",flag:"🐝",tag:"Southwestern"},
+  {name:"Berta",loc:"Western Ethiopia (Benishangul)",eco:"Agriculture, gold trade",rel:"Islam",pol:"Sultanate structure",flag:"⛏️",tag:"Western"},
+  {name:"Gumuz",loc:"Western Ethiopia (Benishangul)",eco:"Hunting, agriculture, ivory",rel:"Traditional",pol:"Village councils",flag:"🌳",tag:"Western"},
+  {name:"Anywa (Anuak)",loc:"Western Ethiopia / South Sudan",eco:"Fishing, agriculture",rel:"Traditional",pol:"Hereditary village chiefs",flag:"🐟",tag:"Western"},
+  {name:"Nuer",loc:"Western Ethiopia / South Sudan",eco:"Cattle herding, fishing",rel:"Traditional (Kwoth)",pol:"Age-grades, leopard-skin priests",flag:"🐄",tag:"Western"},
+  {name:"Majang",loc:"Southwestern Ethiopia",eco:"Honey gathering, agriculture",rel:"Traditional",pol:"Forest-based communities",flag:"🌲",tag:"Western"},
+  {name:"Kunama",loc:"Western Eritrea / Ethiopia",eco:"Agriculture, crafts",rel:"Traditional, Christianity",pol:"Matrilineal clan system",flag:"🌺",tag:"Western"},
+];
+
+const ALL_FC = [
+  // Unit 4
+  {u:4,q:"Who founded the restored Solomonic dynasty in 1270?",a:"King Yikuno Amlak, who overthrew the Zagwe dynasty with church support."},
+  {u:4,q:"What is the Kibre Negest?",a:"'Glory of Kings' — Ethiopia's national epic establishing the Solomonic claim to the throne via descent from King Solomon and the Queen of Sheba."},
+  {u:4,q:"Why did the Orthodox Church support Yikuno Amlak?",a:"The Zagwe dynasty was seen as illegitimate (non-Solomonic). The church wanted a king who would protect its lands and expand Christianity."},
+  {u:4,q:"What was the Royal Prison of Amba Gishen?",a:"A flat-topped mountain in southern Wollo where all male royal family members were confined to prevent succession conflicts. Established by Widim Ra'ad in 1299."},
+  {u:4,q:"Name the most expansionist Solomonic king of the 14th century.",a:"Emperor Amda Tsion (r.1314–1344), who defeated the Ifat Sultanate in 1332 and expanded the kingdom southward."},
+  {u:4,q:"Who was Zara Yaqob and what are his dates?",a:"Emperor of Ethiopia (r.1434–1468), known for sweeping religious reforms, literary works, and unifying the Ethiopian Orthodox Church."},
+  {u:4,q:"Name two religious texts written by Zara Yaqob.",a:"Metsehafe Berhan ('Book of Light') and Metsehafe Milad ('Book of Nativity')."},
+  {u:4,q:"What is the Fetha Negest?",a:"The 'Law of Kings' — a comprehensive legal code combining religious and civil law, compiled during Zara Yaqob's reign. Still influential in Ethiopia."},
+  {u:4,q:"What was the main port linking the Ethiopian interior to the Red Sea?",a:"Zeila (in present-day Somalia), controlled by the Muslim sultanates, especially Adal."},
+  {u:4,q:"What was the diplomatic weapon Ethiopia used against Egypt?",a:"The threat to divert or dam the Nile. Ethiopia was the source of the Blue Nile, which Egypt depended on for agriculture."},
+  {u:4,q:"Why did the Adal Sultanate replace Ifat?",a:"After Amda Tsion defeated Ifat in 1332, the survivors regrouped in the Awash region and formed the new Adal Sultanate, eventually based at Harar."},
+  {u:4,q:"How did the Abuna relationship give Egypt leverage over Ethiopia?",a:"The head of the Ethiopian Orthodox Church (Abuna) was appointed by the Coptic Patriarch in Egypt. Egypt could withhold this appointment as diplomatic pressure."},
+  {u:4,q:"Who was Sa'ad ad-Din II?",a:"A sultan of Adal who fought Emperor Dawit I and was killed at Zeila in 1415. He became a martyr and hero figure in Muslim historical memory."},
+  {u:4,q:"What innovation gave Adal military superiority in the 16th century?",a:"Ottoman firearms — muskets and cannons supplied by the Ottoman Empire through Yemen — which the Ethiopian army lacked."},
+  // Unit 5
+  {u:5,q:"Who was Ahmed Gragn and what does 'Gragn' mean?",a:"Imam Ahmed Ibn Ibrahim al-Ghazi — 'Gragn' means 'the left-handed' in Amharic. He led Adal's campaigns against Ethiopia from 1527."},
+  {u:5,q:"What was the outcome of the Battle of Shimbra Kure (1529)?",a:"Ahmed Gragn defeated Emperor Lebna Dengel; Ethiopia began rapidly losing provinces to Adal forces."},
+  {u:5,q:"When did the Portuguese arrive to help Ethiopia and why?",a:"1541. Portugal sent 400 musketeers under Cristóvão da Gama to support Ethiopia against Adal as part of its Indian Ocean anti-Muslim strategy."},
+  {u:5,q:"What happened at the Battle of Wayna Daga (1543)?",a:"Combined Ethiopian-Portuguese forces defeated and killed Ahmed Gragn. The Adal forces retreated and the war ended."},
+  {u:5,q:"Which emperor converted to Catholicism in 1622, causing civil war?",a:"Emperor Susenyos (r.1606–1632). He abdicated in 1632 after the popular uprising against his forced conversion policy."},
+  {u:5,q:"Who expelled the Jesuits from Ethiopia and founded Gondar?",a:"Emperor Fasiladas (son of Susenyos), who founded Gondar in 1636 as Ethiopia's first permanent capital."},
+  {u:5,q:"What is the Gadaa system?",a:"The Oromo indigenous democratic governance system based on 8-year age-grades. The 'Gadaa' grade (ages 32–40) holds political, military, and judicial power."},
+  {u:5,q:"What is the Gumii Gaayo?",a:"The Oromo general assembly that meets every 8 years to make and review laws — functioning like an ancient parliament."},
+  {u:5,q:"When did the Oromo population movement begin, and where did they originate?",a:"Around 1522, from the Bale and Borena areas of southern Ethiopia. By 1618 they had reached as far north as Tigray."},
+  {u:5,q:"What was UNESCO's recognition of Gadaa?",a:"In 2016, UNESCO inscribed the Gadaa system on the Representative List of the Intangible Cultural Heritage of Humanity."},
+  {u:5,q:"What are the Zemene Mesafint dates and meaning?",a:"1769–1855. 'Era of the Princes' — when powerful Rases (nobles) controlled the government and emperors became puppets."},
+  {u:5,q:"Who ended the Zemene Mesafint?",a:"Kassa Hailu, who became Emperor Tewodros II in 1855 by defeating the major Rases and reunifying Ethiopia."},
+  {u:5,q:"What are Gondar's castles collectively called, and what UNESCO status do they have?",a:"Fasil Ghebbi (Royal Enclosure). They are a UNESCO World Heritage Site."},
+  {u:5,q:"Name the 3 regions covered under Unit 5.5 peoples and states.",a:"Eastern (Somali, Afar, Argoba, Harar), Southern (Sidama, Gedeo, Konso), Southwestern (Wolayta, Kafa, Gamo), Western (Berta, Gumuz, Anywa, Nuer)."},
+  {u:5,q:"What resource did the Afar people control that was crucial for interior trade?",a:"Salt from the Danakil depression — one of the most valuable commodities in the Ethiopian interior trade economy."},
+  {u:5,q:"What is Harar's historical significance?",a:"A UNESCO World Heritage city and one of the great centers of Islamic scholarship in Africa, comparable to Timbuktu. Capital of the Emirate of Harar."},
+];
+
+const GLOSSARY_DATA = [
+  {w:"Solomonic Dynasty",d:"Royal line claiming descent from King Solomon, ruling Ethiopia 1270–1974."},
+  {w:"Kibre Negest",d:"'Glory of Kings' — the Ethiopian national epic legitimizing Solomonic rule."},
+  {w:"Amba Gishen",d:"Mountain prison in southern Wollo where male royals were confined (1299–1540)."},
+  {w:"Fetha Negest",d:"'Law of Kings' — Ethiopia's comprehensive legal-religious code compiled under Zara Yaqob."},
+  {w:"Zagwe Dynasty",d:"Ethiopian ruling dynasty before 1270, known for the Lalibela rock-hewn churches."},
+  {w:"Abuna",d:"Head of the Ethiopian Orthodox Church, historically appointed from Alexandria/Egypt."},
+  {w:"Adal Sultanate",d:"The dominant Muslim sultanate in the Horn of Africa, successor to Ifat, based at Harar."},
+  {w:"Ahmed Gragn",d:"'The left-handed' — Imam Ahmed Ibn Ibrahim al-Ghazi, who conquered 2/3 of Ethiopia 1527–43."},
+  {w:"Gadaa System",d:"Oromo democratic age-grade governance system; UNESCO Intangible Heritage (2016)."},
+  {w:"Abba Gadaa",d:"Elected leader of the Gadaa age-grade; serves one 8-year term, cannot be re-elected."},
+  {w:"Gumii Gaayo",d:"Oromo general assembly meeting every 8 years to make laws — an ancient parliament."},
+  {w:"Zemene Mesafint",d:"'Era of the Princes' (1769–1855): period of noble dominance and imperial weakness."},
+  {w:"Fasil Ghebbi",d:"Royal Enclosure of Gondar — UNESCO World Heritage Site with 6 castles built from 1636."},
+  {w:"Zeila",d:"Key Red Sea port (in present Somalia) linking Ethiopian interior trade to overseas markets."},
+  {w:"Battle of Wayna Daga",d:"1543 battle where Ethiopian-Portuguese forces killed Ahmed Gragn and ended the Adal wars."},
+  {w:"Battle of Shimbra Kure",d:"1529 battle where Ahmed Gragn defeated Emperor Lebna Dengel, beginning Ethiopia's collapse."},
+  {w:"Susenyos",d:"Ethiopian emperor (1606–1632) who converted to Catholicism, causing civil war; abdicated 1632."},
+  {w:"Fasiladas",d:"Ethiopian emperor who expelled Jesuits in 1632, founded Gondar in 1636, restored Orthodoxy."},
+  {w:"Tewodros II",d:"Emperor who ended the Zemene Mesafint in 1855 and reunified Ethiopia."},
+  {w:"Metsehafe Berhan",d:"'Book of Light' — a theological text written by Emperor Zara Yaqob."},
+  {w:"Amda Tsion",d:"Solomonic emperor (1314–1344) who defeated Ifat and greatly expanded the kingdom southward."},
+  {w:"Yikuno Amlak",d:"Founder of the restored Solomonic dynasty (r.1270–1285); overthrew the Zagwe with church support."},
+];
+
+// ══════════ QUIZ DATA ══════════
+const QUIZZES = {
+  q4mc:{
+    type:'mc',
+    qs:[
+      {q:"Who restored the Solomonic dynasty in 1270?",opts:["Lalibela","Yikuno Amlak","Zara Yaqob","Amda Tsion"],ans:1,exp:"Yikuno Amlak overthrew the last Zagwe king with support from the Orthodox Church."},
+      {q:"What is the Kibre Negest?",opts:["A tax law","A legal code","An epic establishing Solomonic legitimacy","A battle record"],ans:2,exp:"Kibre Negest ('Glory of Kings') legitimized Solomonic descent from Solomon and the Queen of Sheba."},
+      {q:"When was Amba Gishen royal prison established?",opts:["1270","1285","1299","1332"],ans:2,exp:"Established during the reign of Widim Ra'ad (1299–1314) to prevent succession conflicts."},
+      {q:"Which emperor is known for major religious reforms in 1434–1468?",opts:["Amda Tsion","Yikuno Amlak","Zara Yaqob","Dawit I"],ans:2,exp:"Zara Yaqob (r.1434–1468) reformed the church calendar, promoted Marian devotion, and wrote theological texts."},
+      {q:"What did the Fetha Negest compile?",opts:["Military records","Religious and civil law","Trade agreements","Church appointments"],ans:1,exp:"Fetha Negest ('Law of Kings') combined religious and civil law; compiled under Zara Yaqob."},
+      {q:"Which port linked Ethiopian interior trade to the Red Sea?",opts:["Massawa","Djibouti","Zeila","Berbera"],ans:2,exp:"Zeila (in present Somalia) was the main trading port of the Muslim sultanates connecting to the Red Sea."},
+      {q:"What diplomatic weapon did Ethiopia use against Egypt?",opts:["Trade embargo","Military invasion","Threat to divert the Nile","Appointing its own Abuna"],ans:2,exp:"Ethiopia threatened to divert or dam the Nile, on which Egypt's agriculture depended."},
+      {q:"Emperor Amda Tsion defeated which sultanate in 1332?",opts:["Adal","Hadiya","Ifat","Dawaro"],ans:2,exp:"Amda Tsion defeated the Ifat Sultanate, scattering its people who later formed Adal."},
+      {q:"What gave Adal military superiority in the 16th century?",opts:["Larger population","Ottoman-supplied firearms","Portuguese alliance","Superior cavalry"],ans:1,exp:"The Ottoman Empire supplied Adal with muskets and cannons — technologies Ethiopia lacked."},
+      {q:"The head of the Ethiopian Orthodox Church (Abuna) was appointed by whom?",opts:["The Ethiopian Emperor","The Pope in Rome","The Coptic Patriarch in Egypt","Ethiopian monks"],ans:2,exp:"This appointment gave Egypt religious leverage over Ethiopia — a key diplomatic relationship."},
+    ]
+  },
+  q4tf:{
+    type:'tf',
+    qs:[
+      {q:"Yikuno Amlak overthrew the Zagwe dynasty in 1270.",ans:true,exp:"Correct. He founded the restored Solomonic line with church backing."},
+      {q:"The Kibre Negest was written in Amharic.",ans:false,exp:"It was written in Ge'ez, Ethiopia's classical literary language."},
+      {q:"Amba Gishen was destroyed by Ahmed Gragn in 1540.",ans:true,exp:"Correct. The royal prison was destroyed during Adal's campaigns."},
+      {q:"Zara Yaqob was both emperor and theologian.",ans:true,exp:"Correct. He personally authored religious texts and reformed the church."},
+      {q:"The Fetha Negest means 'Glory of Kings.'",ans:false,exp:"Fetha Negest means 'Law of Kings.' Kibre Negest means 'Glory of Kings.'"},
+      {q:"Adal Sultanate was based at Harar.",ans:true,exp:"Correct. Harar became the capital of Adal and a great center of Islamic learning."},
+      {q:"Ethiopia's Abuna was appointed by the Pope in Rome.",ans:false,exp:"The Abuna was appointed by the Coptic Patriarch of Alexandria in Egypt."},
+      {q:"Amda Tsion is considered one of Ethiopia's greatest military emperors.",ans:true,exp:"Correct. His campaigns in 1314–1344 greatly expanded the Christian kingdom."},
+    ]
+  },
+  q4match:{
+    type:'match',
+    pairs:[
+      {t:"Yikuno Amlak",d:"Founded the restored Solomonic dynasty in 1270"},
+      {t:"Kibre Negest",d:"The national epic legitimizing Solomonic rule"},
+      {t:"Zara Yaqob",d:"Emperor who unified the church and wrote Metsehafe Berhan"},
+      {t:"Amba Gishen",d:"Mountain prison for royal males established in 1299"},
+      {t:"Fetha Negest",d:"Legal code combining religious and civil law"},
+      {t:"Zeila",d:"Key Red Sea port of the Muslim sultanates"},
+      {t:"Amda Tsion",d:"Defeated the Ifat Sultanate in 1332"},
+      {t:"Abuna",d:"Head of Ethiopian Orthodox Church appointed from Egypt"},
+    ]
+  },
+  q5mc:{
+    type:'mc',
+    qs:[
+      {q:"What does 'Gragn' mean in relation to Ahmed?",opts:["The conqueror","The left-handed","The righteous","The brave"],ans:1,exp:"'Gragn' is the Amharic word for 'left-handed.' Ahmed Ibn Ibrahim al-Ghazi is remembered by this nickname."},
+      {q:"In which year did the Battle of Wayna Daga take place?",opts:["1529","1536","1541","1543"],ans:3,exp:"1543 — Ahmed Gragn was killed in this battle by combined Ethiopian-Portuguese forces."},
+      {q:"Who founded Gondar and in what year?",opts:["Susenyos, 1622","Fasiladas, 1636","Tewodros, 1855","Yohannes, 1872"],ans:1,exp:"Emperor Fasiladas founded Gondar in 1636 as Ethiopia's first permanent capital."},
+      {q:"What does 'Gadaa' refer to?",opts:["A type of coffee","An age-grade governance system","A religious festival","An Amharic literary genre"],ans:1,exp:"Gadaa is the Oromo democratic age-grade system. The 'Gadaa' grade specifically is ages 32–40."},
+      {q:"In which year did UNESCO recognize the Gadaa system?",opts:["2010","2014","2016","2019"],ans:2,exp:"UNESCO inscribed the Gadaa system as Intangible Cultural Heritage in 2016."},
+      {q:"The Zemene Mesafint lasted from 1769 to:",opts:["1820","1835","1855","1870"],ans:2,exp:"1855, when Kassa Hailu became Emperor Tewodros II and ended noble dominance."},
+      {q:"What was the cause of Emperor Susenyos abdicating in 1632?",opts:["Military defeat","His Catholic conversion caused civil war","Old age","Plague"],ans:1,exp:"Susenyos converted to Catholicism and tried to impose it, causing a popular uprising that forced his abdication."},
+      {q:"From where did the Oromo population movement originate?",opts:["Gondar in the north","The Bale and Borena areas in the south","The Red Sea coast","Harar"],ans:1,exp:"The Oromo expanded from Bale and Borena (southern Ethiopia) starting around 1522."},
+      {q:"What supplied Adal with firearms during the wars against Ethiopia?",opts:["Portugal","Egypt","Ottoman Empire","India"],ans:2,exp:"The Ottoman Empire supplied Adal with muskets and cannons through Yemen, giving them military superiority."},
+      {q:"Fasil Ghebbi in Gondar has what international status?",opts:["African Union Heritage","UNESCO World Heritage Site","African Heritage Site","None"],ans:1,exp:"Fasil Ghebbi (Royal Enclosure of Gondar) is a UNESCO World Heritage Site."},
+    ]
+  },
+  q5tf:{
+    type:'tf',
+    qs:[
+      {q:"Ahmed Gragn invaded Ethiopia in 1527.",ans:true,exp:"Correct. His campaigns began in 1527 and nearly destroyed the Christian kingdom."},
+      {q:"Portugal supported the Adal Sultanate against Ethiopia.",ans:false,exp:"Portugal supported Ethiopia against Adal, sending 400 musketeers in 1541."},
+      {q:"Emperor Susenyos converted to Catholicism.",ans:true,exp:"Correct. He converted in 1622 and tried to impose it, leading to civil war."},
+      {q:"The Gadaa system was developed by the Somali people.",ans:false,exp:"The Gadaa system was developed by the Oromo people."},
+      {q:"The Abba Gadaa can serve multiple terms of office.",ans:false,exp:"The Abba Gadaa serves only ONE 8-year term; re-election is not allowed."},
+      {q:"Gondar was founded in 1636 by Fasiladas.",ans:true,exp:"Correct. Fasiladas founded Gondar as Ethiopia's first permanent capital."},
+      {q:"The Zemene Mesafint is known as the Era of the Princes.",ans:true,exp:"Correct. 1769–1855 was a period of noble dominance over weak emperors."},
+      {q:"Konso people are known for terraced farming.",ans:true,exp:"Correct. The Konso are famous for their sophisticated terraced agriculture in southern Ethiopia."},
+    ]
+  },
+  q5match:{
+    type:'match',
+    pairs:[
+      {t:"Ahmed Gragn",d:"Led Adal's invasion of Ethiopia from 1527; killed at Wayna Daga 1543"},
+      {t:"Battle of Wayna Daga",d:"1543 battle that killed Ahmed Gragn and ended the Adal wars"},
+      {t:"Fasiladas",d:"Founded Gondar in 1636 and expelled the Jesuits"},
+      {t:"Gadaa System",d:"Oromo democratic age-grade governance; UNESCO 2016"},
+      {t:"Zemene Mesafint",d:"Era of Princes (1769–1855): noble dominance over emperors"},
+      {t:"Susenyos",d:"Emperor who converted to Catholicism causing civil war; abdicated 1632"},
+      {t:"Gumii Gaayo",d:"Oromo general assembly meeting every 8 years to make laws"},
+      {t:"Tewodros II",d:"Ended the Zemene Mesafint in 1855 by defeating the Rases"},
+    ]
+  },
+  exmc:{type:'mc',qs:[]},
+  extf:{type:'tf',qs:[]},
+  exmatch:{type:'match',pairs:[]}
+};
+
+// Build exam from combined unit quizzes
+QUIZZES.exmc.qs=[...QUIZZES.q4mc.qs,...QUIZZES.q5mc.qs,...QUIZZES.q4mc.qs.slice(0,5),...QUIZZES.q5mc.qs.slice(0,5)].slice(0,30);
+QUIZZES.extf.qs=[...QUIZZES.q4tf.qs,...QUIZZES.q5tf.qs,...QUIZZES.q4tf.qs.slice(0,2),...QUIZZES.q5tf.qs.slice(0,2)].slice(0,20);
+QUIZZES.exmatch.pairs=[...QUIZZES.q4match.pairs.slice(0,5),...QUIZZES.q5match.pairs.slice(0,5)];
+
+// ══════════ STATE ══════════
+const answers={};
+const matchState={};
+let currentPage='home';
+
+// ══════════ PAGE NAVIGATION ══════════
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const p=document.getElementById('page-'+id);
+  if(p){p.classList.add('active');currentPage=id;}
+  document.querySelectorAll('.sb-link').forEach(l=>l.classList.remove('active'));
+  window.scrollTo({top:0,behavior:'smooth'});
+  // init quiz if needed
+  if(id==='u4review'||id==='u5review'||id==='exam') initQuizPage(id);
+  if(id==='flashall') initFC();
+  if(id==='glossary') buildGlossary();
+  if(id==='u55') buildPeoples();
+  if(id==='notes') loadNotes();
+  // animate timeline
+  setTimeout(()=>document.querySelectorAll('.tl-item').forEach(el=>{
+    const ob=new IntersectionObserver(e=>{if(e[0].isIntersecting){el.classList.add('vis');ob.disconnect();}},{threshold:.1});
+    ob.observe(el);
+  }),100);
+}
+
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  sb.classList.toggle('open');
+  sb.classList.toggle('closed');
+}
+function toggleSub(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ══════════ DARK MODE ══════════
+function toggleDark(){
+  const d=document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme',d?'light':'dark');
+  document.getElementById('dkBtn').textContent=d?'🌙':'☀️';
+  localStorage.setItem('theme',d?'light':'dark');
+}
+(function(){const t=localStorage.getItem('theme');if(t){document.documentElement.setAttribute('data-theme',t);document.getElementById('dkBtn').textContent=t==='dark'?'☀️':'🌙';}})();
+
+// ══════════ SCROLL PROGRESS ══════════
+window.addEventListener('scroll',()=>{
+  const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('readprog').style.width=(h>0?s/h*100:0)+'%';
+  document.getElementById('btt').classList.toggle('show',s>300);
+});
+
+// ══════════ SEARCH ══════════
+const searchIndex=[
+  {t:"Restoration of Solomonic Dynasty",page:"u41",k:"yikuno amlak solomonic zagwe kibre negest"},
+  {t:"Power Struggle & Amba Gishen",page:"u42",k:"succession amba gishen prison widim raad"},
+  {t:"Zara Yaqob Reforms",page:"u423",k:"zara yaqob religious reform metsehafe berhan fetha negest"},
+  {t:"Muslim Sultanates",page:"u43",k:"muslim sultanate trade zeila adal"},
+  {t:"Rise of Adal",page:"u431",k:"adal rise ifat sultanate harar"},
+  {t:"Christian-Muslim Rivalry",page:"u44",k:"rivalry christian muslim battle trade routes"},
+  {t:"External Relations",page:"u45",k:"egypt abuna nile portugal europe"},
+  {t:"War with Adal - Ahmed Gragn",page:"u51",k:"ahmed gragn war adal invasion shimbra kure wayna daga"},
+  {t:"Foreign Intervention",page:"u52",k:"portuguese ottoman jesuit susenyos"},
+  {t:"Population Movements",page:"u53",k:"population movement migration 16th century"},
+  {t:"Gadaa System & Oromo",page:"u532",k:"gadaa oromo age grade democracy abba gadaa gumii gaayo"},
+  {t:"Peoples & States",page:"u55",k:"somali afar sidama wolayta kafa gadaa"},
+  {t:"Gondarine Period",page:"u56",k:"gondar fasiladas zemene mesafint tewodros"},
+  {t:"Flashcards",page:"flashall",k:"flashcards revision"},
+  {t:"Unit 4 Quiz",page:"u4review",k:"quiz test mcq"},
+  {t:"Unit 5 Quiz",page:"u5review",k:"quiz test mcq"},
+  {t:"Final Exam",page:"exam",k:"exam final test"},
+];
+function doSearch(v){
+  const drop=document.getElementById('search-drop');
+  if(!v.trim()){drop.style.display='none';return;}
+  const q=v.toLowerCase();
+  const hits=searchIndex.filter(i=>i.t.toLowerCase().includes(q)||i.k.includes(q));
+  if(!hits.length){drop.style.display='none';return;}
+  drop.innerHTML=hits.map(h=>`<div class="sdrop-item" onclick="showPage('${h.page}');document.getElementById('srch').value='';document.getElementById('search-drop').style.display='none'"><strong>${h.t}</strong></div>`).join('');
+  drop.style.display='block';
+}
+function closeDrop(){document.getElementById('search-drop').style.display='none';}
+
+// ══════════ PEOPLES GRID ══════════
+function buildPeoples(){
+  const g=document.getElementById('peoples-grid');
+  g.innerHTML=PEOPLES.map(p=>`
+    <div class="people-card">
+      <div class="flag">${p.flag}</div>
+      <h4>${p.name}</h4>
+      <p><strong>Location:</strong> ${p.loc}</p>
+      <p><strong>Economy:</strong> ${p.eco}</p>
+      <p><strong>Religion:</strong> ${p.rel}</p>
+      <p><strong>Politics:</strong> ${p.pol}</p>
+      <span class="people-tag">${p.tag}</span>
+    </div>`).join('');
+}
+
+// ══════════ GLOSSARY ══════════
+function buildGlossary(){
+  const g=document.getElementById('glossary-grid');
+  if(g.innerHTML) return;
+  g.innerHTML=GLOSSARY_DATA.sort((a,b)=>a.w.localeCompare(b.w)).map(item=>`
+    <div class="term-card"><div class="term-word">${item.w}</div><div class="term-def">${item.d}</div></div>`).join('');
+}
+
+// ══════════ FLASHCARDS ══════════
+let fcFiltered=[...ALL_FC];
+let fcIdx=0;
+function initFC(){fcFiltered=[...ALL_FC];fcIdx=0;renderFC();}
+function filterFC(u){
+  fcFiltered=u==='all'?[...ALL_FC]:ALL_FC.filter(f=>f.u==u);
+  fcIdx=0;
+  document.querySelectorAll('[id^="fc-unit-"]').forEach(b=>b.style.background='');
+  document.getElementById('fc-unit-'+u).style.cssText='background:var(--azure);color:white;border-color:var(--azure)';
+  renderFC();
+}
+function renderFC(){
+  const c=fcFiltered[fcIdx];
+  if(!c)return;
+  document.getElementById('fc-q-text').textContent=c.q;
+  document.getElementById('fc-a-text').textContent=c.a;
+  document.getElementById('fc-ctr').textContent=`${fcIdx+1} / ${fcFiltered.length}`;
+  document.getElementById('fc-prog-fill').style.width=((fcIdx+1)/fcFiltered.length*100)+'%';
+  document.getElementById('fc-card').classList.remove('flipped');
+}
+function flipFC(){document.getElementById('fc-card').classList.toggle('flipped');}
+function nextFC(){if(fcIdx<fcFiltered.length-1){fcIdx++;renderFC();}}
+function prevFC(){if(fcIdx>0){fcIdx--;renderFC();}}
+function shuffleFC(){for(let i=fcFiltered.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcFiltered[i],fcFiltered[j]]=[fcFiltered[j],fcFiltered[i]];}fcIdx=0;renderFC();toast('🔀 Shuffled!');}
+
+// ══════════ QUIZ RENDERING ══════════
+function initQuizPage(pageId){
+  let quizIds=[];
+  if(pageId==='u4review') quizIds=['q4mc','q4tf','q4match'];
+  else if(pageId==='u5review') quizIds=['q5mc','q5tf','q5match'];
+  else quizIds=['exmc','extf','exmatch'];
+  quizIds.forEach(qid=>{
+    const qd=QUIZZES[qid];
+    if(!qd)return;
+    const wrap=document.getElementById(qid+'-qs');
+    if(!wrap||wrap.dataset.built)return;
+    wrap.dataset.built='1';
+    if(qd.type==='mc') buildMC(qid,qd.qs,wrap);
+    else if(qd.type==='tf') buildTF(qid,qd.qs,wrap);
+    else if(qd.type==='match') buildMatch(qid,qd.pairs,wrap);
+  });
+  // init tabs for the page
+  document.querySelectorAll(`#page-${pageId} .qtab`).forEach(t=>{
+    t.onclick=()=>{
+      t.closest('.page').querySelectorAll('.qtab').forEach(x=>x.classList.remove('on'));
+      t.classList.add('on');
+      const panId='panel-'+t.dataset.tab;
+      t.closest('.page').querySelectorAll('.qpanel').forEach(p=>p.classList.remove('on'));
+      document.getElementById(panId).classList.add('on');
+    };
+  });
+}
+
+function buildMC(qid,qs,wrap){
+  wrap.innerHTML=qs.map((q,i)=>`
+    <div class="q-box" id="${qid}-q${i}">
+      <div class="q-num">Q${i+1} of ${qs.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="opts">
+        ${q.opts.map((o,j)=>`<button class="opt" data-qid="${qid}" data-qi="${i}" data-oi="${j}" onclick="selMC('${qid}',${i},${j})">${'ABCD'[j]} — ${o}</button>`).join('')}
+      </div>
+      <div class="explanation" id="${qid}-exp${i}">💡 ${q.exp||''}</div>
+    </div>`).join('');
+}
+function selMC(qid,qi,oi){
+  if(!answers[qid]) answers[qid]={};
+  answers[qid][qi]=oi;
+  document.querySelectorAll(`[data-qid="${qid}"][data-qi="${qi}"]`).forEach(el=>el.classList.remove('sel'));
+  document.querySelector(`[data-qid="${qid}"][data-qi="${qi}"][data-oi="${oi}"]`).classList.add('sel');
+}
+
+function buildTF(qid,qs,wrap){
+  wrap.innerHTML=qs.map((q,i)=>`
+    <div class="q-box" id="${qid}-q${i}">
+      <div class="q-num">Statement ${i+1} of ${qs.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="tf-row">
+        <button class="tf-opt" data-qid="${qid}" data-qi="${i}" data-val="true" onclick="selTF('${qid}',${i},true)">✓ True</button>
+        <button class="tf-opt" data-qid="${qid}" data-qi="${i}" data-val="false" onclick="selTF('${qid}',${i},false)">✗ False</button>
+      </div>
+      <div class="explanation" id="${qid}-exp${i}">💡 ${q.exp||''}</div>
+    </div>`).join('');
+}
+function selTF(qid,qi,val){
+  if(!answers[qid]) answers[qid]={};
+  answers[qid][qi]=val;
+  document.querySelectorAll(`[data-qid="${qid}"][data-qi="${qi}"]`).forEach(el=>el.classList.remove('sel'));
+  document.querySelector(`[data-qid="${qid}"][data-qi="${qi}"][data-val="${val}"]`).classList.add('sel');
+}
+
+function buildMatch(qid,pairs,wrap){
+  matchState[qid]={sel:null,matched:{}};
+  const shuffledDefs=[...pairs].sort(()=>Math.random()-.5);
+  wrap.innerHTML=`
+    <div class="q-box">
+      <div class="q-text">Click a term, then click its matching description.</div>
+      <div class="match-area">
+        <div>
+          <div class="match-col-h">Terms</div>
+          ${pairs.map((p,i)=>`<div class="match-opt" id="${qid}-t${i}" data-qid="${qid}" data-type="t" data-idx="${i}" onclick="selMatch('${qid}','t',${i})">${p.t}</div>`).join('')}
+        </div>
+        <div>
+          <div class="match-col-h">Descriptions</div>
+          ${shuffledDefs.map((p,i)=>`<div class="match-opt" id="${qid}-d${i}" data-qid="${qid}" data-type="d" data-idx="${i}" data-text="${p.d}" onclick="selMatch('${qid}','d',${i})">${p.d}</div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  matchState[qid].shuffled=shuffledDefs;
+}
+function selMatch(qid,type,idx){
+  const st=matchState[qid];
+  const el=document.getElementById(`${qid}-${type}${idx}`);
+  if(!st.sel){
+    // deselect any previously selected of same type
+    document.querySelectorAll(`[data-qid="${qid}"][data-type="${type}"]`).forEach(e=>e.classList.remove('sel'));
+    st.sel={type,idx};
+    el.classList.add('sel');
+  } else if(st.sel.type===type){
+    document.querySelectorAll(`[data-qid="${qid}"][data-type="${type}"]`).forEach(e=>e.classList.remove('sel'));
+    if(st.sel.idx===idx){st.sel=null;return;}
+    st.sel={type,idx};
+    el.classList.add('sel');
+  } else {
+    const tIdx=type==='t'?idx:st.sel.idx;
+    const dIdx=type==='d'?idx:st.sel.idx;
+    if(!answers[qid])answers[qid]={};
+    answers[qid][tIdx]=dIdx;
+    document.getElementById(`${qid}-t${tIdx}`).classList.remove('sel');
+    document.getElementById(`${qid}-d${dIdx}`).classList.remove('sel');
+    document.getElementById(`${qid}-t${tIdx}`).style.borderColor='var(--azure)';
+    document.getElementById(`${qid}-d${dIdx}`).style.borderColor='var(--azure)';
+    st.sel=null;
+  }
+}
+
+// ══════════ GRADING ══════════
+function gradeQuiz(qid){
+  const qd=QUIZZES[qid];
+  if(!qd)return;
+  let score=0,total=0;
+  if(qd.type==='mc'){
+    total=qd.qs.length;
+    qd.qs.forEach((q,i)=>{
+      const ans=answers[qid]&&answers[qid][i];
+      document.querySelectorAll(`[data-qid="${qid}"][data-qi="${i}"]`).forEach(el=>{el.classList.remove('sel');el.style.pointerEvents='none';});
+      const correctEl=document.querySelector(`[data-qid="${qid}"][data-qi="${i}"][data-oi="${q.ans}"]`);
+      if(correctEl)correctEl.classList.add('ok');
+      if(ans!==undefined&&ans!==q.ans){
+        const wrongEl=document.querySelector(`[data-qid="${qid}"][data-qi="${i}"][data-oi="${ans}"]`);
+        if(wrongEl)wrongEl.classList.add('ng');
+      }
+      if(ans===q.ans)score++;
+      const expEl=document.getElementById(`${qid}-exp${i}`);
+      if(expEl)expEl.classList.add('show');
+    });
+  } else if(qd.type==='tf'){
+    total=qd.qs.length;
+    qd.qs.forEach((q,i)=>{
+      const ans=answers[qid]&&answers[qid][i];
+      document.querySelectorAll(`[data-qid="${qid}"][data-qi="${i}"]`).forEach(el=>{el.classList.remove('sel');el.style.pointerEvents='none';});
+      const correctVal=q.ans.toString();
+      const correctEl=document.querySelector(`[data-qid="${qid}"][data-qi="${i}"][data-val="${correctVal}"]`);
+      if(correctEl)correctEl.classList.add('ok');
+      if(ans!==undefined&&ans!==q.ans){
+        const wrongEl=document.querySelector(`[data-qid="${qid}"][data-qi="${i}"][data-val="${(!q.ans).toString()}"]`);
+        if(wrongEl)wrongEl.classList.add('ng');
+      }
+      if(ans===q.ans)score++;
+      const expEl=document.getElementById(`${qid}-exp${i}`);
+      if(expEl)expEl.classList.add('show');
+    });
+  } else if(qd.type==='match'){
+    total=qd.pairs.length;
+    const st=matchState[qid];
+    qd.pairs.forEach((p,tIdx)=>{
+      const dIdx=answers[qid]&&answers[qid][tIdx];
+      if(dIdx===undefined)return;
+      const correctDef=p.d;
+      const chosenDef=st.shuffled[dIdx]?.d;
+      const isOk=correctDef===chosenDef;
+      if(isOk)score++;
+      const tEl=document.getElementById(`${qid}-t${tIdx}`);
+      const dEl=document.getElementById(`${qid}-d${dIdx}`);
+      if(tEl){tEl.classList.add(isOk?'ok':'ng');tEl.style.pointerEvents='none';tEl.style.borderColor='';}
+      if(dEl){dEl.classList.add(isOk?'ok':'ng');dEl.style.pointerEvents='none';dEl.style.borderColor='';}
+    });
+  }
+  const pct=Math.round(score/total*100);
+  const msg=pct>=90?'🌟 Excellent! Outstanding performance!':pct>=70?'👍 Great work! Review what you missed.':pct>=50?'📚 Good effort! Keep reviewing.':'💪 Keep studying — you will improve!';
+  const scoreBox=document.getElementById('score-'+qid);
+  document.getElementById(qid+'-snum').textContent=`${score}/${total}`;
+  document.getElementById(qid+'-sbar').style.width='0%';
+  document.getElementById(qid+'-smsg').textContent=msg;
+  scoreBox.classList.add('show');
+  scoreBox.scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(()=>document.getElementById(qid+'-sbar').style.width=pct+'%',200);
+  saveProgress(qid,score,total);
+}
+function retryQuiz(qid){
+  if(answers[qid])delete answers[qid];
+  const scoreBox=document.getElementById('score-'+qid);
+  if(scoreBox)scoreBox.classList.remove('show');
+  const wrap=document.getElementById(qid+'-qs');
+  if(wrap){delete wrap.dataset.built;wrap.innerHTML='';}
+  const qd=QUIZZES[qid];
+  if(!qd||!wrap)return;
+  if(qd.type==='mc')buildMC(qid,qd.qs,wrap);
+  else if(qd.type==='tf')buildTF(qid,qd.qs,wrap);
+  else if(qd.type==='match')buildMatch(qid,qd.pairs,wrap);
+}
+
+// ══════════ NOTES ══════════
+function loadNotes(){
+  const ta=document.getElementById('notes-ta');
+  ta.value=localStorage.getItem('eth-notes')||'';
+  ta.oninput=()=>{localStorage.setItem('eth-notes',ta.value);document.getElementById('notes-saved').textContent='Saved ✓';};
+}
+function saveNotes(){localStorage.setItem('eth-notes',document.getElementById('notes-ta').value);toast('Notes saved! 💾');}
+function clearNotes(){if(confirm('Clear all notes?')){document.getElementById('notes-ta').value='';localStorage.removeItem('eth-notes');}}
+function printNotes(){window.print();}
+
+// ══════════ STUDY TIMER (nav badge) ══════════
+let sTimerSecs=0;let sTimerInterval=null;
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){clearInterval(sTimerInterval);}
+  else{sTimerInterval=setInterval(()=>{sTimerSecs++;document.getElementById('sTimerVal').textContent=fmt(Math.floor(sTimerSecs/60))+':'+fmt(sTimerSecs%60);},1000);}
+});
+sTimerInterval=setInterval(()=>{sTimerSecs++;document.getElementById('sTimerVal').textContent=fmt(Math.floor(sTimerSecs/60))+':'+fmt(sTimerSecs%60);},1000);
+
+// ══════════ POMODORO TIMER ══════════
+let pomoDur=25*60;let pomoRem=pomoDur;let pomoRunning=false;let pomoInterval=null;let pomoLabel='Focus';
+const arc=document.getElementById('timer-arc');
+function setMode(mins,label){
+  clearInterval(pomoInterval);pomoRunning=false;
+  pomoDur=mins*60;pomoRem=pomoDur;pomoLabel=label;
+  document.getElementById('tmr-label').textContent=label;
+  document.getElementById('tmr-display').textContent=fmt(mins)+':00';
+  document.querySelectorAll('.pomo-btn').forEach(b=>b.classList.remove('on'));
+  updateArc(1);
+}
+function startTimer(){
+  if(pomoRunning)return;pomoRunning=true;
+  pomoInterval=setInterval(()=>{
+    if(pomoRem<=0){clearInterval(pomoInterval);pomoRunning=false;playBell();toast('⏰ Time is up! Great work!');return;}
+    pomoRem--;
+    document.getElementById('tmr-display').textContent=fmt(Math.floor(pomoRem/60))+':'+fmt(pomoRem%60);
+    updateArc(pomoRem/pomoDur);
+  },1000);
+}
+function pauseTimer(){clearInterval(pomoInterval);pomoRunning=false;}
+function resetTimer(){clearInterval(pomoInterval);pomoRunning=false;pomoRem=pomoDur;document.getElementById('tmr-display').textContent=fmt(Math.floor(pomoDur/60))+':'+fmt(pomoDur%60);updateArc(1);}
+function updateArc(frac){const circ=2*Math.PI*88;if(arc)arc.style.strokeDashoffset=circ*(1-frac);}
+function playBell(){try{const ctx=new AudioContext();const o=ctx.createOscillator();const g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=880;g.gain.setValueAtTime(.4,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+1.5);o.start(ctx.currentTime);o.stop(ctx.currentTime+1.5);}catch(e){}}
+function fmt(n){return n.toString().padStart(2,'0');}
+
+// ══════════ PROGRESS SAVE ══════════
+function saveProgress(qid,score,total){
+  const p=JSON.parse(localStorage.getItem('eth-progress')||'{}');
+  p[qid]={score,total,date:new Date().toLocaleDateString()};
+  localStorage.setItem('eth-progress',JSON.stringify(p));
+}
+
+// ══════════ TOAST ══════════
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// ══════════ DASHBOARD ANIMATION ══════════
+function animateDash(){
+  document.querySelectorAll('.dash-fill').forEach(el=>{
+    const target=el.dataset.target;
+    if(target)setTimeout(()=>el.style.width=target+'%',400);
+  });
+}
+
+// ══════════ LOADER ══════════
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('hidden');
+    animateDash();
+    // build initial sub-menus open
+    document.getElementById('sub4').classList.add('open');
+    document.getElementById('sub5').classList.add('open');
+  },1800);
+});
+
+// ══════════ KEYBOARD SHORTCUTS ══════════
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey&&e.key==='k'){e.preventDefault();document.getElementById('srch').focus();}
+  if(e.key==='ArrowRight'&&currentPage==='flashall') nextFC();
+  if(e.key==='ArrowLeft'&&currentPage==='flashall') prevFC();
+  if(e.key===' '&&currentPage==='flashall'){e.preventDefault();flipFC();}
+});
+</script>
+</body>
+</html>
